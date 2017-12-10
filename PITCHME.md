@@ -1,8 +1,8 @@
-#Fully-automated deployments with 0 downtime in Magento 2.2
+# Fully-automated deployments with 0 downtime in Magento 2.2
 
 ---
 
-#Agenda
+# Agenda
 
 * **The bad**
 * Basic Automation
@@ -10,13 +10,13 @@
 * 0 Downtime
 * Build Pipeline
 
-###
++++
 
 Manual Deployment
 
 ---
 
-#Agenda
+# Agenda
 
 * The bad
 * **Basic Automation**
@@ -24,7 +24,7 @@ Manual Deployment
 * 0 Downtime
 * Build Pipeline
 
-###
++++
 
 Bash script
 
