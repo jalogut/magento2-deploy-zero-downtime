@@ -52,20 +52,10 @@ cd ${WORKING_DIR}
 unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}
 
 # CLEAR CACHE
-${LIVE}/${MAGENTO_DIR}/bin/magento cache:clear
+${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush
 
 # CLEAN UP
 KEEP_RELEASES_TAIL=`expr ${KEEP_RELEASES} + 1`
 cd ${WORKING_DIR}/releases && rm -rf `ls -t | tail -n +${KEEP_RELEASES_TAIL}`
 KEEP_DB_BACKUPS_TAIL=`expr ${KEEP_DB_BACKUPS} + 1`
 cd ${WORKING_DIR}/backups && rm -rf `ls -t | tail -n +${KEEP_DB_BACKUPS_TAIL}`
-
-
-
-
-
-
-
-
-
-

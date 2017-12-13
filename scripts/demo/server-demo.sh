@@ -14,6 +14,7 @@ source ${DIR}/demo-magic.sh
 # speed at which to simulate typing. bigger num = faster
 #
 # TYPE_SPEED=20
+TYPE_SPEED_ORIG=${TYPE_SPEED}
 
 #
 # custom prompt
@@ -84,8 +85,8 @@ wait
 p "bin/magento setup:upgrade --keep-generated"
 echo "wait..."
 wait
-pe "bin/magento cache:clear"
 pe "bin/magento maintenance:disable"
+pe "bin/magento cache:flush"
 echo ""
 printf "${Yellow}Release finish - Downtime: [15min - 30min]"
 
@@ -96,6 +97,7 @@ cd ${WORKING_DIR}
 ########################
 pbcopy < ${DIR}/../templates/deploy-0.sh
 pe "vim deploy.sh"
+chmod +x deploy.sh
 
 p "simulate deploy.sh"
 PROMPT_TIMEOUT=2
@@ -121,9 +123,9 @@ wait
 printf "${MAGENTO_DIR}/bin/magento setup:upgrade --keep-generated\n"
 printf "wait...\n\n"
 wait
-printf "${MAGENTO_DIR}/bin/magento cache:clear\n"
 printf "${MAGENTO_DIR}/bin/magento maintenance:disable\n"
 printf "${Green}Disabled maintenance mode${Color_Off}\n"
+printf "${MAGENTO_DIR}/bin/magento cache:flush\n"
 echo ""
 printf "${Yellow}Release finish - Downtime: [15min - 30min]\n"
 
@@ -133,24 +135,39 @@ cd ${WORKING_DIR}
 # Right Deployment
 ########################
 PROMPT_TIMEOUT=0
-
 pe "mkdir releases"
 pe "mv ${LIVE_DIRECTORY_ROOT} releases/1.0"
 pe "ln -s releases/1.0 ${LIVE_DIRECTORY_ROOT}"
+
+unset TYPE_SPEED
+p "mkdir shared \\
+mkdir -p shared/${MAGENTO_DIR}/app/etc \\
+mkdir -p shared/${MAGENTO_DIR}/pub/media \\
+mkdir -p shared/${MAGENTO_DIR}/var/log"
+
+mkdir shared && mkdir -p shared/${MAGENTO_DIR}/app/etc && mkdir -p shared/${MAGENTO_DIR}/pub/media && mkdir -p shared/${MAGENTO_DIR}/var/log
+
+p "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php shared/${MAGENTO_DIR}/app/etc/env.php \\
+mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media shared/${MAGENTO_DIR}/pub/media \\
+mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log shared/${MAGENTO_DIR}/var/log"
+
+mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php shared/${MAGENTO_DIR}/app/etc/env.php
+mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media shared/${MAGENTO_DIR}/pub/media
+mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log shared/${MAGENTO_DIR}/var/log
+
+p "ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/app/etc/env.php ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php \\
+ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/pub/media ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media \\
+ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
+
+ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/app/etc/env.php ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php
+ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/pub/media ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media
+ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log
+
+TYPE_SPEED=${TYPE_SPEED_ORIG}
 pe "ls -lah"
-
-p "Check that the website is still working"
-
-pe "mkdir shared"
-pe "mkdir -p shared/${MAGENTO_DIR}/app/etc"
-pe "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php shared/${MAGENTO_DIR}/app/etc/env.php"
-pe "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media shared/${MAGENTO_DIR}/pub/media"
-pe "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log shared/${MAGENTO_DIR}/var/log"
-
-pe "ln -sfn ${WORKING_DIR}/shared/${MAGENTO_DIR}/app/etc/env.php ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
-pe "ln -sfn ${WORKING_DIR}/shared/${MAGENTO_DIR}/pub/media ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
-pe "ln -sfn ${WORKING_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
-pe "ls -lah"
+pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/"
+pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub"
+pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var"
 
 pe "vim deploy.sh"
 VERSION="1.1"
@@ -188,14 +205,15 @@ echo "bin/magento setup:upgrade --keep-generated"
 printf "wait...\n\n"
 wait
 echo "cd ${WORKING_DIR}"
-echo "unlink ${LIVE_DIRECTORY_ROOT} && ln -sfn ${TARGET} ${LIVE_DIRECTORY_ROOT}"
-printf "${LIVE}/${MAGENTO_DIR}/bin/magento cache:clear\n"
+echo "unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}"
+printf "${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush\n"
 echo ""
 printf "${Yellow}Release finish - Downtime: [20seg]\n"
 
 # TODO
 # mv simulation/releases/1.0 ${TARGET}
 # unlink ${LIVE_DIRECTORY_ROOT} ln -s ${TARGET} ${LIVE_DIRECTORY_ROOT}
+PROMPT_TIMEOUT=0
 pe "ls -lah"
 pe "ls -lah releases"
 

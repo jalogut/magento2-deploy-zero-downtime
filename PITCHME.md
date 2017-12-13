@@ -130,9 +130,28 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 - [Shipit-deploy (Node-js)](https://github.com/shipitjs/shipit-deploy)
 
 +++
-@title[Demo]
+@title[Demo Right Deployment]
 
 [Demo]
+
+---
+@title[Agenda 3]
+## Agenda
+
+* <span style="opacity: 0.2;">Project Setup</span>
+* <span style="opacity: 0.2;">Wrong deployment</span>
+* <span style="opacity: 0.2;">Right deployment</span>
+* **Zero Downtime**
+* <span style="opacity: 0.2;">Build Pipeline</span>
+* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">Issues</span>
+
+@fa[arrow-down]
+
++++
+@title[Zero Downtime]
+#### Zero Downtime
+
 
 ---
 @title[thank you]

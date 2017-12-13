@@ -6,25 +6,33 @@
 # -x display commands for debugging
 set -eux
 
+WORKING_DIR=`pwd`
 LIVE_DIRECTORY_ROOT='public_html'
-MAGENTO_DIR=magento
+LIVE=${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
+MAGENTO_DIR='magento'
 
-cd ${LIVE_DIRECTORY_ROOT}
+cd ${LIVE}
 
-# Set maintenance
+# SET MAINTENANCE
 ${MAGENTO_DIR}/bin/magento maintenance:enable
 
-# UPDATE PROJECT
+# GET CODE
 git pull
 composer install --no-dev
 
 # GENERATE FILES
-${MAGENTO_DIR}/bin/magento setup:di:compile
-${MAGENTO_DIR}/bin/magento setup:static-content:deploy en_US de_CH
+cd ${MAGENTO_DIR}
+bin/magento setup:di:compile
+bin/magento setup:static-content:deploy en_US de_CH
 find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;
 
 # DATABASE UPDATE
-${MAGENTO_DIR}/bin/magento setup:upgrade --keep-generated
+bin/magento setup:upgrade --keep-generated
 
 # UNSET MAINTENANCE
-${MAGENTO_DIR}/bin/magento maintenance:disable
+bin/magento maintenance:disable
+
+# CLEAR CACHE
+${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush
+
+cd ${WORKING_DIR}

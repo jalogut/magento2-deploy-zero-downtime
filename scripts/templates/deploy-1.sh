@@ -6,12 +6,12 @@
 # -x display commands for debugging
 set -eux
 
-LIVE_DIRECTORY_ROOT='public_html'
-MAGENTO_DIR=magento
-GIT_REPO=https://github.com/jalogut/deployment-magento-2-2.git
-
 WORKING_DIR=`pwd`
+LIVE_DIRECTORY_ROOT='public_html'
 LIVE=${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
+MAGENTO_DIR='magento'
+
+GIT_REPO=https://github.com/jalogut/deployment-magento-2-2.git
 TARGET=releases/${VERSION}
 
 # GET CODE
@@ -42,6 +42,8 @@ unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}
 
 # CLEAR CACHE
 ${LIVE}/${MAGENTO_DIR}/bin/magento cache:clear
+
+cd ${WORKING_DIR}
 
 
 
