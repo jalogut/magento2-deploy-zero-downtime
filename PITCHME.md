@@ -34,10 +34,12 @@
 +++
 @title[Project Setup]
 
-- git (or another VCS)
-- composer |
-- vendor <span style="font-weight:bold">out</span> of VCS |
-- app/etc/config.php <span style="font-weight:bold">included</span> in VCS |
+<ul>
+<li class="fragment">git (or another VCS)</li>
+<li class="fragment">composer</li>
+<li class="fragment">vendor __**out**__ of VCS</li>
+<li class="fragment">app/etc/config.php __**included**__ in VCS</li>
+</ul>
 
 +++
 @title[Proper Magento 2 Composer Setup]
