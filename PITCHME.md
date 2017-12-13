@@ -1,6 +1,6 @@
 @title[Introduction]
-## 0 downtime & fully-automated deployments
-##### <span style="font-family:Helvetica Neue; font-weight:bold">in Magento 2.2</span>
+## Fully-automated with 0 downtime
+##### <span style="font-family:Helvetica Neue; font-weight:bold">deployments in <span style="color:#f46f25">Magento 2.2</span></span>
 
 ---?image=assets/img/about-me.png
 @title[About me]
@@ -22,27 +22,28 @@
 ## Agenda
 
 * **Project Setup**
-* Wrong deployment
+* <span style"opacity: 0.5;">Wrong deployment</span>
 * Right deployment
 * 0 Downtime
 * Build Pipeline
 * CI
 * Issues
 
+@fa[arrow-down]
+
 +++
 @title[Project Setup]
 
-- Git (or another VCS)
-- `vendor` out of VCS
-- `app/etc/config.php` included in VCS
+- git (or another VCS)
+- composer |
+- *vendor* out of VCS |
+- *app/etc/config.php* included in VCS |
 
 +++
 @title[Proper Magento 2 Composer Setup]
 
 #### Proper Magento 2 Composer Setup
 Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://blog.hauri.me/proper-magento2-composer-setup.html)
-
-
 
 ---
 @title[Agenda 2]
@@ -55,6 +56,8 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 * Build Pipeline
 * CI
 * Issues
+
+@fa[arrow-down]
 
 +++
 
