@@ -22,12 +22,12 @@
 ## Agenda
 
 * **Project Setup**
-* <span style="opacity: 0.5;">Wrong deployment</span>
-* Right deployment
-* 0 Downtime
-* Build Pipeline
-* CI
-* Issues
+* <span style="opacity: 0.2;">Wrong deployment</span>
+* <span style="opacity: 0.2;">Right deployment</span>
+* <span style="opacity: 0.2;">Zero Downtime</span>
+* <span style="opacity: 0.2;">Build Pipeline</span>
+* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">Issues</span>
 
 @fa[arrow-down]
 
@@ -36,8 +36,8 @@
 
 - git (or another VCS)
 - composer |
-- *vendor* out of VCS |
-- *app/etc/config.php* included in VCS |
+- vendor **out** of VCS |
+- app/etc/config.php **included** in VCS |
 
 +++
 @title[Proper Magento 2 Composer Setup]
