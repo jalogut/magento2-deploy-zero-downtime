@@ -299,6 +299,18 @@ Jenkinsfile example "code directly in slide"
 
 +++
 
+#### TIPS!
+
+magento2-deployment-tool
+
++++
+
+Learn more: 
+- Deploy.php
+- Mage2Deploy
+
++++
+
 #### Issues and Workarounds!
 
 * config:import:dump (gist until PR approved)
@@ -308,6 +320,16 @@ Jenkinsfile example "code directly in slide"
 * static-deploy options not working
 * Rollbacks
 * Cache clear -> sudo service php5-fpm reload && varnish
+
+---
+@title[Take aways]
+## Take Aways
+
+<br>
+
+- Start easy, if you do not have a build system. Just deploy w/o it. You can reliable deploy with Zero downtime
+- If you have a CI in place, try the new build pipeline
+- If issues arise, create a PR and be patient (Magento is not perfect)
 
 
 
