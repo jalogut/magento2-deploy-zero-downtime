@@ -135,6 +135,7 @@ cd ${WORKING_DIR}
 # Right Deployment
 ########################
 PROMPT_TIMEOUT=0
+
 pe "mkdir releases"
 pe "mv ${LIVE_DIRECTORY_ROOT} releases/1.0"
 pe "ln -s releases/1.0 ${LIVE_DIRECTORY_ROOT}"
@@ -168,6 +169,15 @@ pe "ls -lah"
 pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/"
 pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub"
 pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var"
+
+pbcopy < ${DIR}/../chunks/chunk-deploy-1-1.sh
+sleep 1
+pbcopy < ${DIR}/../chunks/chunk-deploy-1-2.sh
+sleep 1
+pbcopy < ${DIR}/../chunks/chunk-deploy-1-3.sh
+sleep 1
+pbcopy < ${DIR}/../chunks/chunk-deploy-1-4.sh
+sleep 1
 
 pe "vim deploy.sh"
 VERSION="1.1"
@@ -220,6 +230,15 @@ pe "ls -lah releases"
 ########################
 # Improvements
 ########################
+pbcopy < ${DIR}/../chunks/chunk-deploy-2-1.sh
+sleep 1
+pbcopy < ${DIR}/../chunks/chunk-deploy-2-2.sh
+sleep 1
+pbcopy < ${DIR}/../chunks/chunk-deploy-2-3.sh
+sleep 1
+pbcopy < ${DIR}/../chunks/chunk-deploy-2-4.sh
+sleep 1
+
 pe "vim deploy.sh"
 
 
