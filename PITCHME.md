@@ -230,6 +230,7 @@ Pipeline image
 +++
 
 Crossed Pipeline image -> .tar and transfer to artefacts server or via scp
+<!-- show ssh-copy-id to transfer build and trigger deploy -->
 
 +++
 
@@ -306,6 +307,7 @@ Jenkinsfile example "code directly in slide"
 * static-deploy language command one by one
 * static-deploy options not working
 * Rollbacks
+* Cache clear -> sudo service php5-fpm reload && varnish
 
 
 

@@ -41,7 +41,7 @@ cd ${WORKING_DIR}
 unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}
 
 # CLEAR CACHE
-${LIVE}/${MAGENTO_DIR}/bin/magento cache:clear
+${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush
 
 cd ${WORKING_DIR}
 
