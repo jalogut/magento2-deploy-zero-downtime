@@ -2,13 +2,8 @@
 ## Fully automated zero downtime
 ##### <span style="font-family:Helvetica Neue; font-weight:bold">deployments in <span style="color:#f46f25">Magento 2.2</span></span>
 
-<!--
 ---?image=assets/img/about-me.png
--->
----
 @title[About me]
-
-![About me](assets/img/about-me.png)
 
 ---
 @title[Agenda 0]
