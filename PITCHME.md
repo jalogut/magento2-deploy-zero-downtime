@@ -35,10 +35,12 @@
 @title[Project Setup]
 
 <ul>
-<li class="fragment">git (or another VCS)</li>
+<li>git (or another VCS)</li>
 <li class="fragment">composer</li>
-<li class="fragment">vendor __**out**__ of VCS</li>
-<li class="fragment">app/etc/config.php __**included**__ in VCS</li>
+<li class="fragment">vendor **out** of VCS</li>
+<li class="fragment">app/etc/env  **out** of VCS</li>
+<li class="fragment">app/etc/config.php **included** in VCS</li>
+<li class="fragment">composer.lock **included** in VCS</li>
 </ul>
 
 +++
@@ -65,6 +67,21 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 @fa[arrow-down]
 
 +++
+
+#### Manually
+
+- Waste of time |
+- Easy to make mistakes |
+- Downtime: 15min - 1hour |
+
++++
+
+#### Simple Automation
+
+- Not reliable |
+- High Downtime: 15min - 1hour |
+
+
 
 ---
 @title[thank you]
