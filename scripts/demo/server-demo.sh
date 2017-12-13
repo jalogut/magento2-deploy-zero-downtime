@@ -53,13 +53,14 @@ WORKING_DIR=`pwd`
 LIVE_DIRECTORY_ROOT='public_html'
 MAGENTO_DIR=magento
 
-: '
 ########################
 # Manually
 ########################
+: '
 PROMPT_TIMEOUT=0
 pe "ls -lah"
 pe "cd ${LIVE_DIRECTORY_ROOT}"
+pe "ls -lah"
 cd ${MAGENTO_DIR}
 pe "bin/magento maintenance:enable"
 cd ${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
@@ -83,15 +84,21 @@ wait
 p "bin/magento setup:upgrade --keep-generated"
 echo "wait..."
 wait
+pe "bin/magento cache:clear"
 pe "bin/magento maintenance:disable"
 echo ""
-printf "${Yellow}Release finish - Downtime: [15min - 1hour]"
-'
+printf "${Yellow}Release finish - Downtime: [15min - 30min]"
+
+cd ${WORKING_DIR}
+
 ########################
 # Simple Automation
 ########################
+pbcopy < ${DIR}/../templates/deploy-0.sh
+pe "vim deploy.sh"
+
+p "simulate deploy.sh"
 PROMPT_TIMEOUT=2
-p "deploy.sh"
 echo "cd ${LIVE_DIRECTORY_ROOT}"
 printf "${MAGENTO_DIR}/bin/magento maintenance:enable\n"
 printf "${Green}Enabled maintenance mode${Color_Off}\n"
@@ -114,7 +121,88 @@ wait
 printf "${MAGENTO_DIR}/bin/magento setup:upgrade --keep-generated\n"
 printf "wait...\n\n"
 wait
+printf "${MAGENTO_DIR}/bin/magento cache:clear\n"
 printf "${MAGENTO_DIR}/bin/magento maintenance:disable\n"
 printf "${Green}Disabled maintenance mode${Color_Off}\n"
 echo ""
-printf "${Yellow}Release finish - Downtime: [15min - 1hour]\n"
+printf "${Yellow}Release finish - Downtime: [15min - 30min]\n"
+
+cd ${WORKING_DIR}
+'
+########################
+# Right Deployment
+########################
+PROMPT_TIMEOUT=0
+
+pe "mkdir releases"
+pe "mv ${LIVE_DIRECTORY_ROOT} releases/1.0"
+pe "ln -s releases/1.0 ${LIVE_DIRECTORY_ROOT}"
+pe "ls -lah"
+
+p "Check that the website is still working"
+
+pe "mkdir shared"
+pe "mkdir -p shared/${MAGENTO_DIR}/app/etc"
+pe "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php shared/${MAGENTO_DIR}/app/etc/env.php"
+pe "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media shared/${MAGENTO_DIR}/pub/media"
+pe "mv ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log shared/${MAGENTO_DIR}/var/log"
+
+pe "ln -sfn ${WORKING_DIR}/shared/${MAGENTO_DIR}/app/etc/env.php ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
+pe "ln -sfn ${WORKING_DIR}/shared/${MAGENTO_DIR}/pub/media ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
+pe "ln -sfn ${WORKING_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
+pe "ls -lah"
+
+pe "vim deploy.sh"
+VERSION="1.1"
+p "VERSION=${VERSION} simulate deploy.sh"
+PROMPT_TIMEOUT=1
+
+GIT_REPO=https://github.com/jalogut/deployment-magento-2-2.git
+LIVE=${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
+TARGET=releases/${VERSION}
+
+echo "git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${TARGET}"
+printf "wait...\n\n"
+wait
+echo "cd ${TARGET}"
+echo "composer install --no-dev --prefer-dist --optimize-autoloader"
+printf "wait...\n\n"
+wait
+echo "cd ${WORKING_DIR}"
+echo "ln -sfn ${WORKING_DIR}/shared/magento/app/etc/env.php ${TARGET}/${MAGENTO_DIR}/app/etc/env.php"
+echo "ln -sfn ${WORKING_DIR}/shared/magento/pub/media ${TARGET}/${MAGENTO_DIR}/pub/media"
+echo "ln -sfn ${WORKING_DIR}/shared/magento/var/log ${TARGET}/${MAGENTO_DIR}/var/log"
+echo "cd ${TARGET}/${MAGENTO_DIR}"
+echo "bin/magento setup:di:compile"
+printf "wait...\n\n"
+wait
+echo "bin/magento setup:static-content:deploy en_US de_CH"
+printf "wait...\n\n"
+wait
+echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;\n"
+printf "wait...\n\n"
+wait
+echo "${LIVE}/${MAGENTO_DIR}/bin/magento maintenance:enable"
+printf "${Green}Enabled maintenance mode${Color_Off}\n"
+echo "bin/magento setup:upgrade --keep-generated"
+printf "wait...\n\n"
+wait
+echo "cd ${WORKING_DIR}"
+echo "unlink ${LIVE_DIRECTORY_ROOT} && ln -sfn ${TARGET} ${LIVE_DIRECTORY_ROOT}"
+printf "${LIVE}/${MAGENTO_DIR}/bin/magento cache:clear\n"
+echo ""
+printf "${Yellow}Release finish - Downtime: [20seg]\n"
+
+# TODO
+# mv simulation/releases/1.0 ${TARGET}
+# unlink ${LIVE_DIRECTORY_ROOT} ln -s ${TARGET} ${LIVE_DIRECTORY_ROOT}
+pe "ls -lah"
+pe "ls -lah releases"
+
+########################
+# Improvements
+########################
+pe "vim deploy.sh"
+
+
+

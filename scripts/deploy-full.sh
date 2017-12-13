@@ -26,9 +26,9 @@ composer install --no-dev --prefer-dist --optimize-autoloader
 
 #Symlinks
 cd ${WORKING_DIR}
-ln -sfn ${WORKING_DIR}/shared/magento/app/etc/env.php releases/${TARGET}/${MAGENTO_DIR}/app/etc/env.php
-ln -sfn ${WORKING_DIR}/shared/magento/pub/media releases/${TARGET}/${MAGENTO_DIR}/pub/media
-ln -sfn ${WORKING_DIR}/shared/magento/var/log releases/${TARGET}/${MAGENTO_DIR}/var/log
+ln -sf ${WORKING_DIR}/shared/magento/app/etc/env.php releases/${TARGET}/${MAGENTO_DIR}/app/etc/env.php
+ln -sf ${WORKING_DIR}/shared/magento/pub/media releases/${TARGET}/${MAGENTO_DIR}/pub/media
+ln -sf ${WORKING_DIR}/shared/magento/var/log releases/${TARGET}/${MAGENTO_DIR}/var/log
 
 #Generate Files
 cd ${WORKING_DIR}/releases/${TARGET}/${MAGENTO_DIR}
@@ -48,7 +48,7 @@ bin/magento setup:upgrade --keep-generated
 #Swap Live version
 ${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/bin/magento maintenance:disable
 cd ${WORKING_DIR}
-ln -sfn releases/${TARGET} ${LIVE_DIRECTORY_ROOT}
+unlink ${LIVE_DIRECTORY_ROOT} && ln -sf releases/${TARGET} ${LIVE_DIRECTORY_ROOT}
 echo "sudo service php5-fpm reload"
 
 #Clean up

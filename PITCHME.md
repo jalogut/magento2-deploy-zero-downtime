@@ -45,7 +45,6 @@
 
 +++
 @title[Proper Magento 2 Composer Setup]
-
 #### Proper Magento 2 Composer Setup
 
 <br>
@@ -67,7 +66,6 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 @fa[arrow-down]
 
 +++
-
 #### Manually
 
 <br>
@@ -75,15 +73,15 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 [Demo]
 
 +++
-
 #### Manually
+
+<br>
 
 - Waste of time |
 - Easy to make mistakes |
-- High Downtime: 15min - 1hour |
+- High Downtime: 15min - 30min |
 
 +++
-
 #### Simple Automation
 
 <br>
@@ -91,11 +89,12 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 [Demo]
 
 +++
-
 #### Simple Automation
 
+<br>
+
 - Not reliable |
-- High Downtime: 15min - 1hour |
+- High Downtime: 15min - 30min |
 
 ---
 @title[Agenda 3]
@@ -113,13 +112,11 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 
 +++
 @title[Right Deployment]
-
-#### Righ deployment
+#### Right deployment
 
 <br>
 
-- Release in separate folder | 
-- switch version at the end
+![Relase Symlink](assets/img/release_symlink.png)
 
 +++
 @title[Tools]
