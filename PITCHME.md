@@ -1,5 +1,5 @@
 @title[Introduction]
-## Fully-automated with 0 downtime
+## Fully automated zero downtime
 ##### <span style="font-family:Helvetica Neue; font-weight:bold">deployments in <span style="color:#f46f25">Magento 2.2</span></span>
 
 ---?image=assets/img/about-me.png
@@ -22,7 +22,7 @@
 ## Agenda
 
 * **Project Setup**
-* <span style"opacity: 0.5;">Wrong deployment</span>
+* <span style="opacity: 0.5;">Wrong deployment</span>
 * Right deployment
 * 0 Downtime
 * Build Pipeline
