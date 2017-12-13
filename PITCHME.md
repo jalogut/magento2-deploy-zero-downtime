@@ -70,9 +70,25 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 
 #### Manually
 
+<br>
+
+[Demo]
+
++++
+
+#### Manually
+
 - Waste of time |
 - Easy to make mistakes |
-- Downtime: 15min - 1hour |
+- High Downtime: 15min - 1hour |
+
++++
+
+#### Simple Automation
+
+<br>
+
+[Demo]
 
 +++
 
@@ -81,7 +97,45 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 - Not reliable |
 - High Downtime: 15min - 1hour |
 
+---
+@title[Agenda 3]
+## Agenda
 
+* <span style="opacity: 0.2;">Project Setup</span>
+* <span style="opacity: 0.2;">Wrong deployment</span>
+* **Right deployment**
+* <span style="opacity: 0.2;">Zero Downtime</span>
+* <span style="opacity: 0.2;">Build Pipeline</span>
+* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">Issues</span>
+
+@fa[arrow-down]
+
++++
+@title[Right Deployment]
+
+#### Righ deployment
+
+<br>
+
+- Release in separate folder | 
+- switch version at the end
+
++++
+@title[Tools]
+
+#### Tools
+
+<br>
+
+- [Deployer (PHP)](https://deployer.org/)
+- [Capistrano (Ruby)](http://capistranorb.com/)
+- [Shipit-deploy (Node-js)](https://github.com/shipitjs/shipit-deploy)
+
++++
+@title[Demo]
+
+[Demo]
 
 ---
 @title[thank you]
