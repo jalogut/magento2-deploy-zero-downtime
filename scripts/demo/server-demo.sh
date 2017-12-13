@@ -218,7 +218,7 @@ echo "cd ${WORKING_DIR}"
 echo "unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}"
 printf "${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush\n"
 echo ""
-printf "${Yellow}Release finish - Downtime: [20seg]\n"
+printf "${Yellow}Release finish - Downtime: [20sec]\n"
 
 # TODO
 # mv simulation/releases/1.0 ${TARGET}
