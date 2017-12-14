@@ -264,7 +264,11 @@ Crossed Pipeline image -> .tar and transfer to artefacts server or via scp
 
 Jenkins tutorial
 
-+++ 
++++
+
+Update bash script with develop-timestamp. To be able to deploy latest from develop
+
++++
 
 Jenkinsfile example "code directly in slide"
 
@@ -330,6 +334,7 @@ Learn more:
 - Start easy, if you do not have a build system. Just deploy w/o it. You can reliable deploy with Zero downtime
 - If you have a CI in place, try the new build pipeline
 - If issues arise, create a PR and be patient (Magento is not perfect)
+- Do not use the demo bash scripts. I created them only for the demo. Now that you know how the deployments should work, use your favourite tool to implement that
 
 
 
