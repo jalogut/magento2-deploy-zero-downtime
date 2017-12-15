@@ -6,7 +6,6 @@
 # -x display commands for debugging
 set -eux
 
-GIT_REPO=https://github.com/jalogut/magento-2.2-demo.git
 LANGUAGES='en_US de_CH'
 STATIC_DEPLOY_PARAMS="--exclude-theme=Magento/blank"
 

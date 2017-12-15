@@ -16,11 +16,10 @@ fi
 if [ ! -d 'backups' ]; then
   mkdir backups
 fi
+if [ ! -d 'downloads' ]; then
+  mkdir downloads
+fi
 
-GIT_REPO=https://github.com/jalogut/magento-2.2-demo.git
-LANGUAGES='en_US de_CH'
-STATIC_DEPLOY_PARAMS="--exclude-theme=Magento/blank"
-DISABLE_MODULES=""
 KEEP_RELEASES=3
 KEEP_DB_BACKUPS=3
 
@@ -35,11 +34,11 @@ if [[ ${VERSION} = "develop" ]]; then
     TARGET=${TARGET}-$(date +%s)
 fi
 RELEASE=${WORKING_DIR}/${TARGET}
+DOWNLOADS_DIR='downloads'
 
 # GET CODE
-git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${RELEASE}
-cd ${RELEASE}
-composer install --no-dev --prefer-dist --optimize-autoloader
+# Optionally: wget $url -> save in ${DOWNLOADS_DIR}/${VERSION}.tar.gz
+mkdir -p ${RELEASE} && tar -xzf ${DOWNLOADS_DIR}/${VERSION}.tar.gz -C ${RELEASE}
 
 # SYMLINKS SHARED
 cd ${WORKING_DIR}
@@ -47,18 +46,8 @@ ln -sf ${WORKING_DIR}/shared/magento/app/etc/env.php ${RELEASE}/${MAGENTO_DIR}/a
 ln -sf ${WORKING_DIR}/shared/magento/pub/media ${RELEASE}/${MAGENTO_DIR}/pub/media
 ln -sf ${WORKING_DIR}/shared/magento/var/log ${RELEASE}/${MAGENTO_DIR}/var/log
 
-# GENERATE FILES
-cd ${RELEASE}/${MAGENTO_DIR}
-if [[ -n ${DISABLE_MODULES} ]]; then
-    bin/magento module:disable ${DISABLE_MODULES}
-fi
-bin/magento setup:di:compile
-bin/magento setup:static-content:deploy ${LANGUAGES} ${STATIC_DEPLOY_PARAMS}
-find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;
-
 # DATABASE UPDATE
 ${LIVE}/${MAGENTO_DIR}/bin/magento maintenance:enable
-sleep 20
 cd ${RELEASE}/${MAGENTO_DIR}
 ${LIVE}/${MAGERUN_BIN} db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
 bin/magento setup:upgrade --keep-generated
