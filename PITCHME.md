@@ -111,12 +111,28 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 @fa[arrow-down]
 
 +++
-@title[Right Deployment]
-#### Right deployment
+@title[Current live]
+#### Current live
 
 <br>
 
-![Relase Symlink](assets/img/release_symlink.png)
+![Relase Symlink](assets/img/release_symlink_1.png)
+
++++
+@title[Deploying new version]
+#### Deploying new version
+
+<br>
+
+![Relase Symlink](assets/img/release_symlink_2.png)
+
++++
+@title[Switch symlink]
+#### Switch symlink
+
+<br>
+
+![Relase Symlink](assets/img/release_symlink_3.png)
 
 +++
 @title[Tools]
