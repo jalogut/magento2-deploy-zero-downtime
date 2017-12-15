@@ -3,5 +3,5 @@ TARGET=releases/${VERSION}
 RELEASE=${WORKING_DIR}/${TARGET}
 
 # GET CODE
-git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${TARGET}
-cd ${TARGET}
+git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${RELEASE}
+cd ${RELEASE}
