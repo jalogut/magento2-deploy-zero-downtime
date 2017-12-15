@@ -312,6 +312,7 @@ magento2-deployment-tool
 Learn more: 
 - Deploy.php
 - Mage2Deploy
+- https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf
 
 +++
 
