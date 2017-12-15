@@ -8,8 +8,8 @@ set -eux
 
 GIT_REPO=https://github.com/jalogut/magento-2.2-demo.git
 LANGUAGES='en_US de_CH'
-STATIC_DEPLOY_PARAMS="--exclude-theme=Magento/blank"
-DISABLE_MODULES=""
+STATIC_DEPLOY_PARAMS='--exclude-theme=Magento/blank'
+DISABLE_MODULES=''
 DOWNLOADS_DIR='downloads'
 
 WORKING_DIR=`pwd`

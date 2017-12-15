@@ -19,8 +19,9 @@ fi
 
 GIT_REPO=https://github.com/jalogut/magento-2.2-demo.git
 LANGUAGES='en_US de_CH'
-STATIC_DEPLOY_PARAMS="--exclude-theme=Magento/blank"
-DISABLE_MODULES=""
+STATIC_DEPLOY_PARAMS='--exclude-theme=Magento/blank'
+# pipe separated modules 'Vendor_ModuleOne|Vendor_ModuleTwo'
+DISABLE_MODULES=''
 KEEP_RELEASES=3
 KEEP_DB_BACKUPS=3
 
@@ -66,7 +67,7 @@ if [[ 1 == ${UPGRADE_NEEDED} ]]; then
   	bin/magento setup:upgrade --keep-generated
 fi
 CONFIG_OUPUT=$(bin/magento config:set workaround/check/config_status 1) || echo ${CONFIG_OUPUT}
-if [[ ${CONFIG_OUPUT} == 'This command is unavailable right now. To continue working with it please run app:config:import or setup:upgrade command before.' ]]; then
+if [[ ${CONFIG_OUPUT} == "This command is unavailable right now. To continue working with it please run app:config:import or setup:upgrade command before." ]]; then
 	bin/magento maintenance:enable
 	bin/magento app:config:import
 fi

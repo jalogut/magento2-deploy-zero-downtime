@@ -325,6 +325,7 @@ Learn more:
 * static-deploy options not working
 * Rollbacks
 * Cache clear -> sudo service php5-fpm reload && varnish
+* Disable module if installed in required-dev
 
 ---
 @title[Take aways]
