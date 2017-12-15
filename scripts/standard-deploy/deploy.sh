@@ -57,11 +57,19 @@ bin/magento setup:static-content:deploy ${LANGUAGES} ${STATIC_DEPLOY_PARAMS}
 find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;
 
 # DATABASE UPDATE
-${LIVE}/${MAGENTO_DIR}/bin/magento maintenance:enable
-sleep 20
 cd ${RELEASE}/${MAGENTO_DIR}
-${LIVE}/${MAGERUN_BIN} db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
-bin/magento setup:upgrade --keep-generated
+
+bin/magento setup:db:status && UPGRADE_NEEDED=0 || UPGRADE_NEEDED=1
+if [[ 1 == ${UPGRADE_NEEDED} ]]; then
+  	bin/magento maintenance:enable
+  	${LIVE}/${MAGERUN_BIN} db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
+  	bin/magento setup:upgrade --keep-generated
+fi
+CONFIG_OUPUT=$(bin/magento config:set workaround/check/config_status 1) || echo ${CONFIG_OUPUT}
+if [[ ${CONFIG_OUPUT} == 'This command is unavailable right now. To continue working with it please run app:config:import or setup:upgrade command before.' ]]; then
+	bin/magento maintenance:enable
+	bin/magento app:config:import
+fi
 
 # UPDATE CRONTAB
 cd ${RELEASE}/${MAGENTO_DIR}
