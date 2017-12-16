@@ -20,16 +20,14 @@ fi
 GIT_REPO=https://github.com/jalogut/magento-2.2-demo.git
 LANGUAGES='en_US de_CH'
 STATIC_DEPLOY_PARAMS='--exclude-theme=Magento/blank'
-# pipe separated modules 'Vendor_ModuleOne|Vendor_ModuleTwo'
-DISABLE_MODULES=''
-KEEP_RELEASES=3
-KEEP_DB_BACKUPS=3
 
 WORKING_DIR=`pwd`
 MAGENTO_DIR='magento'
 LIVE_DIRECTORY_ROOT='public_html'
 LIVE=${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
 MAGERUN_BIN=bin/n98-magerun2
+KEEP_RELEASES=3
+KEEP_DB_BACKUPS=3
 
 TARGET=releases/${VERSION}
 if [[ ${VERSION} = "develop" ]]; then
@@ -50,9 +48,6 @@ ln -sf ${WORKING_DIR}/shared/magento/var/log ${RELEASE}/${MAGENTO_DIR}/var/log
 
 # GENERATE FILES
 cd ${RELEASE}/${MAGENTO_DIR}
-if [[ -n ${DISABLE_MODULES} ]]; then
-    bin/magento module:disable ${DISABLE_MODULES}
-fi
 bin/magento setup:di:compile
 bin/magento setup:static-content:deploy ${LANGUAGES} ${STATIC_DEPLOY_PARAMS}
 find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;
