@@ -36,10 +36,10 @@
 <ul>
 <li>git (or another VCS)</li>
 <li class="fragment">composer</li>
-<li class="fragment">vendor **out** of VCS</li>
-<li class="fragment">app/etc/env  **out** of VCS</li>
-<li class="fragment">app/etc/config.php **included** in VCS</li>
-<li class="fragment">composer.lock **included** in VCS</li>
+<li class="fragment">~~vendor~~ NOT in VCS</li>
+<li class="fragment">~~etc/env.php~~  NOT in VCS</li>
+<li class="fragment">etc/config.php in VCS</li>
+<li class="fragment">composer.lock in VCS</li>
 </ul>
 
 +++
