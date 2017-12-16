@@ -236,12 +236,9 @@ Show PR link
 @fa[arrow-down]
 
 +++
-@titla[Build Pipeline]
-#### Build Pipeline
+@title[Build Pipeline]
 
 ![Build Pipeline](assets/img/build_pipeline.png)
-
-Build: Archived artifact that can be consumed directly in different servers.
 
 +++
 
@@ -366,42 +363,122 @@ Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://de
 ## Tips
 
 +++
+@title[Composer Tweaks]
 
-#### TIPS!
+<p><span class="menu-title slide-title">Source: Composer.json</span></p>
 
-* build and deploy in a repo, so you share it among all projects. Only properties on the project level. (show how to move the properties)
-* (db backup before setup:upgrade)
-* disable modules if needed
-* clean up old releases and backups
-* release unique name for develop branch, if we want to continuously update our dev server with the latest status of develop
-* cron:update
+```json
+  "config": {
+    "preferred-install": {
+      "<your_vendor>/*": "source",
+      "*": "dist"
+    }
+  },
+
+```
+
+`composer install --no-dev --prefer-dist`
+
+`--prefer-dist` caches better.
 
 +++
 
-#### TIPS!
+Also use `--optimize-autoloader` for servers. It generates autoloader faster. Do not use in development.
 
-magento2-deployment-tool
+`composer install --no-dev --prefer-dist --optimize-autoloader`
 
 +++
 
-Learn more: 
-- Deploy.php
-- Mage2Deploy
-- https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf
+#### Composer parallel downloads
+
+`composer global require hirak/prestissimo`
+
++++
+#### Update crontab automatically
+
+`bin/magento cron:install --force`
+
+di.xml
+```xml
+<type name="Magento\Framework\Crontab\TasksProviderInterface">
+    <arguments>
+        <argument name="tasks" xsi:type="array">
+            <item name="CUSTOM_CRON" xsi:type="array">
+                <item name="expression" xsi:type="string">0 3 * * *</item>
+                <item name="command" xsi:type="string">{magentoRoot}bin/magento custom:command</item>
+            </item>
+        </argument>
+    </arguments>
+</type>
+```
+
++++ 
+#### Static Files Strategies
+
+[http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html)
+
+- Standard
+- Quick
+- Compact
+
+According to docs:
+
+`bin/magento setup:static-content:deploy -f --strategy compact`
+-> 3 locales x2 faster; 15 locales x10 faster – due to less disk I/O
+
+**Warning**: I did not test it yet.
+
++++
+
+#### DB Backup 
+
+<p><span class="menu-title slide-title">Source: deploy.sh</span></p>
+```bash
+if [[ 1 == ${UPGRADE_NEEDED} ]]; then
+  	bin/magento maintenance:enable
+  	${LIVE}/${MAGERUN_BIN} db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
+  	bin/magento setup:upgrade --keep-generated
+fi
+```
+
++++
+#### Use Tools
+
+<br>
+All this OUT-OF-THE-BOX
+
+[magento2-builder-tool](https://github.com/staempfli/magento2-builder-tool)
+[magento2-deployment-tool](https://github.com/staempfli/magento2-deployment-tool)
+
+Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-builder)
 
 ---
 @title[Issues]
 
 #### Issues and Workarounds!
 
+* restart fpm after release `sudo service php5-fpm reload`
+
++++
+
 * config:import:dump (gist until PR approved)
-* config:import:status (workaroung until PR approved)
+
++++
+
 * Local $_ENV for urls and shared settings
+
++++
+
 * static-deploy language command one by one
 * static-deploy options not working
+
++++
+
 * Rollbacks
-* Cache clear -> sudo service php5-fpm reload && varnish
-* Disable module if installed in required-dev
+
+<!-- * While rare, Rollback are sometimes needed. You can automate that although I would not recomend it. It is always better to release a new hotfix version than rolling back. Anyway, if for any reason you need to do it, you need to:
+    * Check setup:upgrade and config:import:status. If green then switch symlinks and update caches. 
+    * If red, enable maintenance, setup_modules back or config:import, switch, clear cache and disable maintenance. -->
 
 ---
 @title[Take aways]
@@ -409,12 +486,31 @@ Learn more:
 
 <br>
 
-- Start easy, if you do not have a build system. Just deploy w/o it. You can reliable deploy with Zero downtime
-- If you have a CI in place, try the new build pipeline
-- If issues arise, create a PR and be patient (Magento is not perfect)
-- Do not use the demo bash scripts. I created them only for the demo. Now that you know how the deployments should work, use your favourite tool to implement that
-- No excuses for not automated deployments (You have seen how simple it is to accomplish zero downtime by using bash scripts. So even if that is not the best way, you do not have any excuses to not automate your deployments)
+- Start easy, you can accomplish 0 downtime even w/o a build system (very convenient for small project w/o autatic tests) |
+- Build pipeline if a step forward for better deployment strategies |
+- App:config commands are not mature yet. |
+- Pipeline issues, create a PR and be patient (Magento is not perfect) |
+- Automate your deployments using a tool. Bash scripts were only for the demo |
 
+
+–––
+@title[Resources]
+#### Resources
+
+Learn more: 
+
+- Deploy.php
+- Mage2Deploy
+- https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf
+
++++
+#### Presentation source
+
+Slides: [https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)
+
+Scripts: [https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)
+
+Project Example: [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
 
 
 ---
