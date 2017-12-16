@@ -43,16 +43,16 @@
 </ul>
 
 +++
-@title[Proper Magento 2 Composer Setup]
-#### Proper Magento 2 Composer Setup
+@title[Composer Setup Tutorial]
+#### Tutorial
 
 <br>
 
-Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://blog.hauri.me/proper-magento2-composer-setup.html)
+Proper Magento 2 Composer Setup: [https://blog.hauri.me/](https://blog.hauri.me/proper-magento2-composer-setup.html)
 
 +++
 @title[Magento 2 Project Example]
-#### Magento 2 Project Example
+#### Example
 
 <br>
 
