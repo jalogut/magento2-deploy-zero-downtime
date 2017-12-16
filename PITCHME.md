@@ -16,7 +16,6 @@
 * Zero Downtime
 * Build Pipeline
 * CI
-* Issues
 
 ---
 @title[Agenda 1]
