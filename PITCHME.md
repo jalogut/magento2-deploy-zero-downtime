@@ -40,8 +40,6 @@
 <li class="fragment">etc/config.php in VCS</li>
 <li class="fragment">~~etc/env.php~~  **NOT** in VCS</li>
 <li class="fragment">~~vendor~~ **NOT** in VCS</li>
-
-
 </ul>
 
 +++
@@ -51,6 +49,14 @@
 <br>
 
 Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://blog.hauri.me/proper-magento2-composer-setup.html)
+
++++
+@title[Magento 2 Project Example]
+#### Magento 2 Project Example
+
+<br>
+
+Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
 
 ---
 @title[Agenda 2]
@@ -329,13 +335,12 @@ Automatically: Tests -> builds -> deploys
 
 +++
 @title[Jenkins Tutorial]
-####Jenkins tutorial
+#### Jenkins tutorial
 
 <br>
 
-Jenkins Tutorial[https://dev.to/jalogut](https://dev.to/jalogut)
-
-<span style="font-size:0.6em; color:gray">Setup Continuos Integration/Delivery system in just 4 steps with Jenkins Pipelines and Blue Ocean</span>
+Jenkins Tutorial: [https://dev.to/jalogut/setup-continuos-integrationdelivery-system-in-just-4-steps-with-jenkins-pipelines-and-blue-ocean](https://dev.to/jalogut)
+<span style="font-size:0.6em; color:gray">Setup Continuos Integration/Delivery system</span>
 
 +++?code=https://github.com/jalogut/magento-2.2-demo/blob/master/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
