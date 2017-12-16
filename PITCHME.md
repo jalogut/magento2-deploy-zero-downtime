@@ -27,7 +27,6 @@
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
 * <span style="opacity: 0.2;">CI</span>
-* <span style="opacity: 0.2;">Issues</span>
 
 @fa[arrow-down]
 
@@ -61,7 +60,6 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
 * <span style="opacity: 0.2;">CI</span>
-* <span style="opacity: 0.2;">Issues</span>
 
 @fa[arrow-down]
 
@@ -106,7 +104,6 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
 * <span style="opacity: 0.2;">CI</span>
-* <span style="opacity: 0.2;">Issues</span>
 
 @fa[arrow-down]
 
@@ -184,7 +181,6 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 * **Zero Downtime**
 * <span style="opacity: 0.2;">Build Pipeline</span>
 * <span style="opacity: 0.2;">CI</span>
-* <span style="opacity: 0.2;">Issues</span>
 
 @fa[arrow-down]
 
@@ -210,6 +206,7 @@ Show PR link
 
 - setup:db:status
 - config:import:status (Magento >= 2.2.3)
+	- Gist with workaround
 
 +++
 @title[Zero downtime accomplished]
@@ -227,50 +224,87 @@ Show PR link
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * **Build Pipeline**
 * <span style="opacity: 0.2;">CI</span>
-* <span style="opacity: 0.2;">Issues</span>
 
 @fa[arrow-down]
 
 +++
+@titla[Build Pipeline]
+#### Build Pipeline
 
+![Build Pipeline](assets/img/build_pipeline.png)
+
+Build: Archived artifact that can be consumed directly in different servers.
+
++++
+
+#### What do we need?
+Config used for Bundle same as servers
+
+<br>
+
+#### How?
 Config Propagation
 
 +++
 
-Possible to compile and generate assets w/o DB
-
-+++
-
-Docs config:import:dump (only static config... haha) It dumps everything (we'll see later how to overcome that)
-
-+++
-
-Show config.php example (my example with only static config). Thanks to that we can build all project files in a separated server.
-
-+++
-
-Pipeline image
-
-+++
-
-Crossed Pipeline image -> .tar and transfer to artefacts server or via scp
-<!-- show ssh-copy-id to transfer build and trigger deploy -->
-
-+++
-
-[Demo] (move to build.sh. [static-deploy -f] deploy.sh unzips only)
-
-+++ 
-
-#### Pros
+#### Magento Config Propagation
 
 <br>
 
-* Spare CPU usage on live server during deployment
-* Keep archive in something like S3 or Nexus for history, back in time checks or auditing.
-* For CI systems where you release first to stage/test and later same archive to the Prod server
-<!-- See after minute 8:55 http://deploy.lo/video/deploy-zip/ -->
-* Fancy deployment AWS can automatically deploy builds using load balancers 
+- etc/config.php
+- app:config:dump
+
++++
+
+#### Config.php
+
+![Config.php](assets/img/config_dump_system.png)
+
++++
+
+#### app:config:dump
+
+![Facepalm](https://media.giphy.com/media/ce1x5VblkD69i/giphy.gif)
+
++++
+
+#### Up-Vote this PR! 👍
+
+<br>
+
+[Add argument on app:config:dump to skip dumping all system settings](https://github.com/magento/magento2/pull/12410)
+
+
++++?gist=jalogut/d72e0af6e10c502bff90423e66bf07b9&lang=xml&title=Workaround: Skip System Dump GIST
+
++++
+
+#### Update config.php if changes on:
+
+<br>
+
+- Scopes (website, stores)
+- Theme 
+- Web assets config
+
++++
+
+[Demo]
+
+<!-- move to build.sh. [static-deploy -f] deploy.sh unzips only -->
+<!-- scp out with command -->
+<!-- mention artifact.excludes -->
+
++++ 
+
+#### Why?
+
+<br>
+
+- Save CPU during deployment
+- Identify file generation issues right away |
+- Common bundle to share amongst Envs |
+- History for auditing or back in time checks | 
 
 ---
 @title[Agenda 6]
@@ -282,37 +316,48 @@ Crossed Pipeline image -> .tar and transfer to artefacts server or via scp
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
 * **CI**
-* <span style="opacity: 0.2;">Issues</span>
 
 +++
 
-Jenkins tutorial
+#### One system for all
+
+<br>
+
+Automatically: Tests -> builds -> deploys
 
 +++
+@title[Jenkins Tutorial]
+####Jenkins tutorial
 
-Update bash script with develop-timestamp. To be able to deploy latest from develop
+<br>
+
+Jenkins Tutorial[https://dev.to/jalogut](https://dev.to/jalogut)
+
+<span style="font-size:0.6em; color:gray">Setup Continuos Integration/Delivery system in just 4 steps with Jenkins Pipelines and Blue Ocean</span>
+
++++?code=https://github.com/jalogut/magento-2.2-demo/blob/master/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
+
+@[10-12,13,16](Get project and execute tests)
+@[29-32](Build Bundle)
+@[34-36](Always deploy Develop)
+@[40,42,50,56](Confirm and deploy to Stage/Production)
+
++++?code=scripts/build-jenkins/build&lang=bash&title=Source: build
+
+@[22-24](Git clone not needed. Jenkins gets it automatically)
+
++++?code=scripts/build-deploy/deploy.sh&lang=bash&title=Source: deploy.sh
+
+@[33-34](Timestamp name for develop releases)
 
 +++
+@title[Jenkins Video]
 
-Jenkinsfile example "code directly in slide"
-
-+++ 
-
-[Video]
-
-<!-- edit file, tag, push, Blue ocean, server updated 0 downtime -->
+![YouTube Video](https://www.youtube.com/embed/qxPEcCca9tk)
 
 ---
-@title[Agenda 7]
-## Agenda
-
-* <span style="opacity: 0.2;">Project Setup</span>
-* <span style="opacity: 0.2;">Wrong deployment</span>
-* <span style="opacity: 0.2;">Right deployment</span>
-* <span style="opacity: 0.2;">Zero Downtime</span>
-* <span style="opacity: 0.2;">Build Pipeline</span>
-* <span style="opacity: 0.2;">CI</span>
-* **Tips - Issues - Workaounds**
+@title[Tips]
+## Tips
 
 +++
 
@@ -338,7 +383,8 @@ Learn more:
 - Mage2Deploy
 - https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf
 
-+++
+---
+@title[Issues]
 
 #### Issues and Workarounds!
 
@@ -361,6 +407,7 @@ Learn more:
 - If you have a CI in place, try the new build pipeline
 - If issues arise, create a PR and be patient (Magento is not perfect)
 - Do not use the demo bash scripts. I created them only for the demo. Now that you know how the deployments should work, use your favourite tool to implement that
+- No excuses for not automated deployments (You have seen how simple it is to accomplish zero downtime by using bash scripts. So even if that is not the best way, you do not have any excuses to not automate your deployments)
 
 
 
