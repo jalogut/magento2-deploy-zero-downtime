@@ -339,8 +339,7 @@ Automatically: Tests -> builds -> deploys
 
 <br>
 
-Jenkins Tutorial: [https://dev.to/jalogut/setup-continuos-integrationdelivery-system-in-just-4-steps-with-jenkins-pipelines-and-blue-ocean](https://dev.to/jalogut)
-<span style="font-size:0.6em; color:gray">Setup Continuos Integration/Delivery system</span>
+Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://dev.to/jalogut/setup-continuos-integrationdelivery-system-in-just-4-steps-with-jenkins-pipelines-and-blue-ocean)
 
 +++?code=https://github.com/jalogut/magento-2.2-demo/blob/master/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
