@@ -135,6 +135,13 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 ![Relase Symlink](assets/img/release_symlink_3.png)
 
 +++
+@title[Shared Data]
+#### Shared Data
+
+![Shared Data](assets/img/release_symlink_4.png)
+
++++
+
 @title[Tools]
 
 #### Tools
@@ -160,6 +167,14 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 - Low Downtime: ~20sec |
 
 ---
+@title[Disclaimer 2.2]
+#### Disclaimer
+
+<br>
+
+##### hereafter <span style="font-family:Helvetica Neue; font-weight:bold">only version <span style="color:#f46f25">>= 2.2</span></span>
+
+---
 @title[Agenda 4]
 ## Agenda
 
@@ -174,17 +189,10 @@ Tutorial: [https://blog.hauri.me/proper-magento2-composer-setup.html](https://bl
 @fa[arrow-down]
 
 +++
-@title[Maintenance needed]
-#### Maintenance needed
+@title[Skip Maintenance]
+#### Skip Maintenance
 
-<br>
-
-- setup:upgrade
-- config:import
-
-+++
-@title[Skip maintenance]
-#### Skip them if not needed = no maintenance = 0 downtime
+![Skip maintenance](assets/img/skip_maintenance.png)
 
 +++
 @title[Demo zero downtime]

@@ -5,6 +5,7 @@
 ########################
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${DIR}/demo-magic.sh
+source ${DIR}/properties.sh
 
 ########################
 # Configure the options
@@ -21,38 +22,10 @@ TYPE_SPEED_ORIG=${TYPE_SPEED}
 #
 # see http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html for escape sequences
 #
-DEMO_PROMPT="➜ ${CYAN}\W "
+DEMO_PROMPT="➜ ${BCyan}\W "
 
 # hide the evidence
 clear
-
-# COLORS
-# Reset
-Color_Off='\033[0m'       # Text Reset
-
-# Regular Colors
-Black='\033[0;30m'        # Black
-Red='\033[0;31m'          # Red
-Green='\033[0;32m'        # Green
-Yellow='\033[0;33m'       # Yellow
-Blue='\033[0;34m'         # Blue
-Purple='\033[0;35m'       # Purple
-Cyan='\033[0;36m'         # Cyan
-White='\033[0;37m'        # White
-
-# Bold
-BBlack='\033[1;30m'       # Black
-BRed='\033[1;31m'         # Red
-BGreen='\033[1;32m'       # Green
-BYellow='\033[1;33m'      # Yellow
-BBlue='\033[1;34m'        # Blue
-BPurple='\033[1;35m'      # Purple
-BCyan='\033[1;36m'        # Cyan
-BWhite='\033[1;37m'       # White
-
-WORKING_DIR=`pwd`
-LIVE_DIRECTORY_ROOT='public_html'
-MAGENTO_DIR=magento
 
 ########################
 # Manually
@@ -88,46 +61,22 @@ wait
 pe "bin/magento maintenance:disable"
 pe "bin/magento cache:flush"
 echo ""
-printf "${Yellow}Release finish - Downtime: [15min - 30min]"
+printf "${YELLOW}Release finish - Downtime: [15min - 30min]${COLOR_RESET}"
 
 cd ${WORKING_DIR}
+'
 
 ########################
 # Simple Automation
 ########################
-pbcopy < ${DIR}/../templates/deploy-0.sh
+: '
+pbcopy < ${DIR}/templates/deploy-0.sh
 pe "vim deploy.sh"
-chmod +x deploy.sh
+pe "chmod +x deploy.sh"
+pe "ll"
 
-p "simulate deploy.sh"
-PROMPT_TIMEOUT=2
-echo "cd ${LIVE_DIRECTORY_ROOT}"
-printf "${MAGENTO_DIR}/bin/magento maintenance:enable\n"
-printf "${Green}Enabled maintenance mode${Color_Off}\n"
-
-printf "git pull\n"
-printf "wait...\n\n"
-wait
-printf "composer install --no-dev\n"
-printf "wait...\n\n"
-wait 
-printf "${MAGENTO_DIR}/bin/magento setup:di:compile\n"
-printf "wait...\n\n"
-wait
-printf "${MAGENTO_DIR}/bin/magento setup:static-content:deploy en_US de_CH\n"
-printf "wait...\n\n"
-wait
-printf "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;\n"
-printf "wait...\n\n"
-wait
-printf "${MAGENTO_DIR}/bin/magento setup:upgrade --keep-generated\n"
-printf "wait...\n\n"
-wait
-printf "${MAGENTO_DIR}/bin/magento maintenance:disable\n"
-printf "${Green}Disabled maintenance mode${Color_Off}\n"
-printf "${MAGENTO_DIR}/bin/magento cache:flush\n"
-echo ""
-printf "${Yellow}Release finish - Downtime: [15min - 30min]\n"
+p "~/simulation/deploy-0.sh"
+${DIR}/simulation/scripts/deploy-0.sh
 
 cd ${WORKING_DIR}
 '
@@ -137,8 +86,8 @@ cd ${WORKING_DIR}
 PROMPT_TIMEOUT=0
 
 pe "mkdir releases"
-pe "mv ${LIVE_DIRECTORY_ROOT} releases/1.0"
-pe "ln -s releases/1.0 ${LIVE_DIRECTORY_ROOT}"
+pe "mv ${LIVE_DIRECTORY_ROOT} releases/0.0.1"
+pe "ln -s releases/0.0.1 ${LIVE_DIRECTORY_ROOT}"
 
 unset TYPE_SPEED
 p "mkdir shared \\
@@ -166,70 +115,37 @@ ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_DIRECTORY_ROOT}/${MAG
 
 TYPE_SPEED=${TYPE_SPEED_ORIG}
 pe "ls -lah"
-pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/"
-pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub"
-pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var"
+#pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/"
+#pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub"
+#pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var"
 
-pbcopy < ${DIR}/../chunks/chunk-deploy-1-1.sh
+pbcopy < ${DIR}/chunks/chunk-deploy-1-1.sh
 sleep 1
-pbcopy < ${DIR}/../chunks/chunk-deploy-1-2.sh
+pbcopy < ${DIR}/chunks/chunk-deploy-1-2.sh
 sleep 1
-pbcopy < ${DIR}/../chunks/chunk-deploy-1-3.sh
+pbcopy < ${DIR}/chunks/chunk-deploy-1-3.sh
 sleep 1
-pbcopy < ${DIR}/../chunks/chunk-deploy-1-4.sh
+pbcopy < ${DIR}/chunks/chunk-deploy-1-4.sh
 sleep 1
 
 pe "vim deploy.sh"
-VERSION="1.1"
-p "VERSION=${VERSION} simulate deploy.sh"
-PROMPT_TIMEOUT=1
+VERSION="1.0"
+p "VERSION=${VERSION} ~/simulation/deploy-1.sh"
+VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1.sh
 
-GIT_REPO=https://github.com/jalogut/deployment-magento-2-2.git
-LIVE=${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
-TARGET=releases/${VERSION}
-
-echo "git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${TARGET}"
-printf "wait...\n\n"
-wait
-echo "cd ${TARGET}"
-echo "composer install --no-dev --prefer-dist --optimize-autoloader"
-printf "wait...\n\n"
-wait
-echo "cd ${WORKING_DIR}"
-echo "ln -sfn ${WORKING_DIR}/shared/magento/app/etc/env.php ${TARGET}/${MAGENTO_DIR}/app/etc/env.php"
-echo "ln -sfn ${WORKING_DIR}/shared/magento/pub/media ${TARGET}/${MAGENTO_DIR}/pub/media"
-echo "ln -sfn ${WORKING_DIR}/shared/magento/var/log ${TARGET}/${MAGENTO_DIR}/var/log"
-echo "cd ${TARGET}/${MAGENTO_DIR}"
-echo "bin/magento setup:di:compile"
-printf "wait...\n\n"
-wait
-echo "bin/magento setup:static-content:deploy en_US de_CH"
-printf "wait...\n\n"
-wait
-echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;\n"
-printf "wait...\n\n"
-wait
-echo "${LIVE}/${MAGENTO_DIR}/bin/magento maintenance:enable"
-printf "${Green}Enabled maintenance mode${Color_Off}\n"
-echo "bin/magento setup:upgrade --keep-generated"
-printf "wait...\n\n"
-wait
-echo "cd ${WORKING_DIR}"
-echo "unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}"
-printf "${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush\n"
-echo ""
-printf "${Yellow}Release finish - Downtime: [20sec]\n"
-
-# TODO
-# mv simulation/releases/1.0 ${TARGET}
-# unlink ${LIVE_DIRECTORY_ROOT} ln -s ${TARGET} ${LIVE_DIRECTORY_ROOT}
-PROMPT_TIMEOUT=0
 pe "ls -lah"
 pe "ls -lah releases"
+unset TYPE_SPEED
+pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
+pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
+pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
+TYPE_SPEED=${TYPE_SPEED_ORIG}
 
 ########################
-# Improvements
+# Zero Downtime
 ########################
+: '
+PROMPT_TIMEOUT=0
 pbcopy < ${DIR}/../chunks/chunk-deploy-2-1.sh
 sleep 1
 pbcopy < ${DIR}/../chunks/chunk-deploy-2-2.sh
@@ -240,6 +156,4 @@ pbcopy < ${DIR}/../chunks/chunk-deploy-2-4.sh
 sleep 1
 
 pe "vim deploy.sh"
-
-
-
+'

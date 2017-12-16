@@ -1,9 +1,0 @@
-+ /Volumes/workspace/deployment-demo/live-server/public_html/bin/n98-magerun2 db:dump --compression=gzip /Volumes/workspace/deployment-demo/live-server/backups/live-1513328077.sql.gz
-
-
-  Dump MySQL Database
-
-
-Start dumping database server-luma-shop to file /Volumes/workspace/deployment-demo/live-server/backups/live-1513328077.sql.gz
-mysqldump: [Warning] Using a password on the command line interface can be insecure.
-Finished
