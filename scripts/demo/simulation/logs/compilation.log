@@ -1,0 +1,4 @@
++ bin/magento setup:di:compile
+Compilation was started.
+Interception cache generation... 7/7 [============================] 100% 37 secs 256.0 MiB
+Generated code and dependency injection configuration successfully.
