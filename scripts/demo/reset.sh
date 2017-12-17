@@ -33,6 +33,7 @@ mv ${LIVE_SERVER_DIR}/shared/${MAGENTO_DIR}/app/etc/env.php ${LIVE_SERVER_DIR}/$
 mv ${LIVE_SERVER_DIR}/shared/${MAGENTO_DIR}/pub/media ${LIVE_SERVER_DIR}/${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media
 mv ${LIVE_SERVER_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_SERVER_DIR}/${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log
 
+mv ${LIVE_SERVER_DIR}/downloads/1.2.tar.gz demo-backups/builds/
 mv ${LIVE_SERVER_DIR}/releases/* demo-backups/releases
 
 rm -rf ${LIVE_SERVER_DIR}/releases
