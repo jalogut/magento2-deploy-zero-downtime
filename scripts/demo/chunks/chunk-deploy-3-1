@@ -1,4 +1,5 @@
-# CREATE ARTIFACT
-cd ${BUILD}
-ARTIFACT_FILENAME=../${VERSION}.tar.gz
-tar --exclude-from=../artifact.excludes -czf ${ARTIFACT_FILENAME} .
+DOWNLOADS_DIR='downloads'
+
+# GET CODE
+# Optionally: wget $url -> save in ${DOWNLOADS_DIR}/${VERSION}.tar.gz
+mkdir -p ${RELEASE} && tar -xzf ${DOWNLOADS_DIR}/${VERSION}.tar.gz -C ${RELEASE}

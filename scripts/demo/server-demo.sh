@@ -163,7 +163,7 @@ pe "clear"
 PROMPT_TIMEOUT=0
 
 p "open deploy.sh"
-pbcopy < ${DIR}/chunks/chunk-deploy-3-3
+pbcopy < ${DIR}/chunks/chunk-deploy-3-1
 sleep 1
 open deploy.sh
 pe "mkdir downloads"

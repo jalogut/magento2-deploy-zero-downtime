@@ -28,12 +28,12 @@ DEMO_PROMPT="➜ ${WHITE} jalogut@demo-build-server "
 clear
 
 pe "ls -lah"
-pbcopy < ${DIR}/chunks/chunk-deploy-3-1
+pbcopy < ${DIR}/chunks/chunk-build-1-1
 sleep 1
 pe "touch build.sh && open build.sh"
 pe "chmod +x build.sh"
 
-pbcopy < ${DIR}/chunks/chunk-deploy-3-2
+pbcopy < ${DIR}/chunks/chunk-build-1-2
 sleep 1
 pe "vim artifact.excludes"
 
