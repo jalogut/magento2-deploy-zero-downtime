@@ -360,8 +360,8 @@ Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://de
 
 @[10-12,13,16](Get project and execute tests)
 @[29-32](Build Bundle)
-@[34-36](Always deploy Develop)
-@[40,42,50,56](Confirm and deploy to Stage/Production)
+@[33-38](Always deploy Develop)
+@[40-42,49-50,55-56](Confirm and deploy to Stage/Production)
 
 +++
 @title[Jenkins Video]

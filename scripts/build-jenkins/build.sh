@@ -23,7 +23,7 @@ MAGENTO_DIR='magento'
 BUILD=${WORKING_DIR}
 
 # GET CODE
-# git clone not neede. Jenkins checkouts the code automatically
+# git clone not needed for Jenkins
 cd ${BUILD}
 composer install --no-dev --prefer-dist --optimize-autoloader
 
