@@ -130,7 +130,12 @@ sleep 1
 pe "open deploy.sh"
 VERSION="1.0"
 p "VERSION=${VERSION} ~/simulation/deploy-1.sh"
-VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1.sh
+VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-1.sh
+wait
+VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-2.sh
+wait
+VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-3.sh
+wait
 
 pe "ls -lah"
 pe "ls -lah releases"

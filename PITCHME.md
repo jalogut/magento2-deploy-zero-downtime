@@ -243,16 +243,22 @@ Show PR link
 +++
 
 #### What do we need?
-Config used for Bundle same as servers
 
 <br>
 
+Config used for Bundle same as servers
+
++++
+
 #### How?
+
+<br>
+
 Config Propagation
 
 +++
 
-#### Magento Config Propagation
+#### Magento 2.2
 
 <br>
 
@@ -261,26 +267,22 @@ Config Propagation
 
 +++
 
-#### Config.php
-
 ![Config.php](assets/img/config_dump_system.png)
 
 +++
 
-#### app:config:dump
+`app:config:dump`
 
-![Facepalm](https://media.giphy.com/media/ce1x5VblkD69i/giphy.gif)
+![Facepalm](https://media.giphy.com/media/XsUtdIeJ0MWMo/giphy.gif)
 
 +++
 
-#### Up-Vote this PR! 👍
+#### Up-Vote PR! 👍
 
 <br>
 
-[Add argument on app:config:dump to skip dumping all system settings](https://github.com/magento/magento2/pull/12410)
-
-
-+++?gist=jalogut/d72e0af6e10c502bff90423e66bf07b9&lang=xml&title=Workaround: Skip System Dump GIST
+- Skip dumping all settings: [PR #12410](https://github.com/magento/magento2/pull/12410)
+- Workaround: [gist magento2-config-dump-skip-system.xml](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9)
 
 +++
 
@@ -295,10 +297,6 @@ Config Propagation
 +++
 
 [Demo]
-
-<!-- move to build.sh. [static-deploy -f] deploy.sh unzips only -->
-<!-- scp out with command -->
-<!-- mention artifact.excludes -->
 
 +++ 
 
@@ -372,6 +370,8 @@ Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://de
 ---
 @title[Tips]
 ## Tips
+
+@fa[arrow-down]
 
 +++
 @title[Composer Tweaks]
@@ -465,27 +465,54 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 
 ---
 @title[Issues]
+## Issues
 
-#### Issues and Workarounds!
-
-* restart fpm after release `sudo service php5-fpm reload`
-
-+++
-
-* config:import:dump (gist until PR approved)
+@fa[arrow-down]
 
 +++
+#### Magento cache is not enough
 
-* Local $_ENV for urls and shared settings
+<br>
 
-+++
-
-* static-deploy language command one by one
-* static-deploy options not working
+Flush all caches after release: OPcache, Varnish, Redis, ...
 
 +++
+#### Dump Configuration
 
-* Rollbacks
+<br>
+
+- Skip dumping all settings: [PR #12410](https://github.com/magento/magento2/pull/12410)
+- Workaround: [gist magento2-config-dump-skip-system.xml](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9)
+
++++
+#### Local core_config_data
+
+<br>
+
+- Cumbersome Solution: [Dev Docs](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
+- Configuration by Environment: [PR #12361](https://github.com/magento/magento2/pull/12361)
+
++++
+#### Static deploy and Js translations
+
+<br>
+
+- Issue still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
+- Workaround: run `setup:static-content:deploy` once per language 
+
++++
+#### Static deploy options ignored
+
+<br>
+
+`setup:static-content:deploy -f --exclude-theme=Magento/blank` 
+
+- doesn't exclude the theme
+
++++
+#### Rollbacks
+
+TODO GRAPH
 
 <!-- * While rare, Rollback are sometimes needed. You can automate that although I would not recomend it. It is always better to release a new hotfix version than rolling back. Anyway, if for any reason you need to do it, you need to:
     * Check setup:upgrade and config:import:status. If green then switch symlinks and update caches. 
@@ -503,30 +530,50 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 - Pipeline issues, create a PR and be patient (Magento is not perfect) |
 - Automate your deployments using a tool. Bash scripts were only for the demo |
 
-
 –––
 @title[Resources]
-#### Resources
+## Resources
 
-Learn more: 
-
-- Deploy.php
-- Mage2Deploy
-- https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf
+@fa[arrow-down]
 
 +++
-#### Presentation source
+#### Magento 2: 
 
-Slides: [https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)
+<br>
 
-Scripts: [https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)
+- Alan Kent - Magento 2.2 deployment:
+	- [Video](https://www.youtube.com/watch?v=nIFfn3YHkPs)
+	- [Slides](https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf)
+- MageDeploy2 (https://dev98.de -> Introducing MageDeploy2)[https://dev98.de/2017/03/01/introducing-magedeploy2/]
 
-Project Example: [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
++++
+#### Deployments in General
+
+<br>
+
+Chris Fidao video-course: [DeployPHP](https://deploy.serversforhackers.com/)
+
++++
+#### This Presentation
+
+- Slides: [https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)
+
+- Scripts: [https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)
+
+- Project Example: [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
 
 
 ---
 @title[thank you]
 
 ##Thanks
+
+<br>
+
+Feedback & Questions
+
+👇
+
+[@jalogut](https://twitter.com/jalogut)
 
  
