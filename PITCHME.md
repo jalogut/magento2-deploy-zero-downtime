@@ -338,20 +338,28 @@ Automatically: Tests -> builds -> deploys
 
 Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://dev.to/jalogut/setup-continuos-integrationdelivery-system-in-just-4-steps-with-jenkins-pipelines-and-blue-ocean)
 
-+++?code=https://github.com/jalogut/magento-2.2-demo/blob/master/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
++++?code=scripts/build-jenkins/build.sh&lang=bash&title=Source: Jenkins build.sh
+
+@[17-18](Properties and excludes project specific)
+@[25-28](Git clone not needed. Jenkins gets it automatically)
+
++++?code=scripts/build-deploy/deploy.sh&lang=bash&title=Source: deploy.sh
+
+@[33-35](Timestamp name for develop releases)
+
++++
+@title[Jenkins project example]
+#### Jenkins Example
+
+[https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
+![Jenking project example](assets/img/jenkins_project_example.png)
+
++++?code=scripts/build-jenkins/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
 @[10-12,13,16](Get project and execute tests)
 @[29-32](Build Bundle)
 @[34-36](Always deploy Develop)
 @[40,42,50,56](Confirm and deploy to Stage/Production)
-
-+++?code=scripts/build-jenkins/build&lang=bash&title=Source: build
-
-@[22-24](Git clone not needed. Jenkins gets it automatically)
-
-+++?code=scripts/build-deploy/deploy.sh&lang=bash&title=Source: deploy.sh
-
-@[33-34](Timestamp name for develop releases)
 
 +++
 @title[Jenkins Video]
