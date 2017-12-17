@@ -322,6 +322,8 @@ Config Propagation
 * <span style="opacity: 0.2;">Build Pipeline</span>
 * **CI**
 
+@fa[arrow-down]
+
 +++
 
 #### One system for all
