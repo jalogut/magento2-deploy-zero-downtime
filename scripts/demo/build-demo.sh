@@ -22,7 +22,7 @@ TYPE_SPEED_ORIG=${TYPE_SPEED}
 #
 # see http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html for escape sequences
 #
-DEMO_PROMPT="➜ ${BCyan}\W "
+DEMO_PROMPT="➜ ${WHITE} jalogut@demo-build-server "
 
 # hide the evidence
 clear
