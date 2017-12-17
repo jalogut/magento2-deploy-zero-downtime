@@ -27,19 +27,30 @@ DEMO_PROMPT="➜ ${BCyan}\W "
 # hide the evidence
 clear
 
+PROJECT_NAME='luma-shop'
+
 # ====================
 # Skip maintenance
 # ====================
-pe "cd luma-shop"
-pe "${MAGENTO_DIR}/bin/magento setup:db:status"
+pe "ls -lah"
+pe "cd ${PROJECT_NAME}"
 unset TYPE_SPEED
-pe "vim ${MAGENTO_DIR}/app/code/Demo/Settings/etc/module.xml"
-pe "${MAGENTO_DIR}/bin/magento setup:db:status"
+pe "vim ${MAGENTO_DIR}/setup/src/Magento/Setup/Console/Command/DbStatusCommand.php"
+# pe "vim ${MAGENTO_DIR}/app/code/Demo/Settings/etc/module.xml"
+# pe "${MAGENTO_DIR}/bin/magento setup:db:status"
 
 TYPE_SPEED=TYPE_SPEED_ORIG
 pe "vim ${MAGENTO_DIR}/app/etc/config.php"
-pe "vim ${MAGENTO_DIR}/bin/magento app:config:import"
+outputCache=$(${MAGENTO_DIR}/bin/magento c:c)
+pe "${MAGENTO_DIR}/bin/magento app:config:import"
 
-git reset --hard
+pe "${MAGENTO_DIR}/bin/magento | grep config:"
+pe "${MAGENTO_DIR}/bin/magento config:set path/non_existing 1"
+
+unset TYPE_SPEED
+pe "vim ${MAGENTO_DIR}/app/etc/config.php"
+pe "${MAGENTO_DIR}/bin/magento config:set path/non_existing 1"
+
+outputConfigImport=$(${MAGENTO_DIR}/bin/magento app:config:import)
 
 cd ${WORKING_DIR}

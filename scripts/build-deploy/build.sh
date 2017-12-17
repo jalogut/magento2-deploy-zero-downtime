@@ -17,7 +17,6 @@ MAGENTO_DIR='magento'
 BUILD=${WORKING_DIR}/${VERSION}
 
 # GET CODE
-rm -rf ${BUILD}
 git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${BUILD}
 cd ${BUILD}
 composer install --no-dev --prefer-dist --optimize-autoloader
@@ -30,8 +29,8 @@ find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && fi
 
 # CREATE ARTIFACT
 cd ${BUILD}
-ARTIFACT_FILENAME=/tmp/${VERSION}.tar.gz
-tar --exclude-from=${WORKING_DIR}/artifact.excludes -czf ${ARTIFACT_FILENAME} .
+ARTIFACT_FILENAME=../${VERSION}.tar.gz
+tar --exclude-from=../artifact.excludes -czf ${ARTIFACT_FILENAME} .
 
 # TRANSFER ARTIFACT
 scp -P 22 ${ARTIFACT_FILENAME} ${SERVER_USERNAME}@${SERVER_HOST}:${DOWNLOADS_DIR}

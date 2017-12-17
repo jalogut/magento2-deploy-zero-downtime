@@ -1,0 +1,5 @@
+DOWNLOADS_DIR='downloads'
+
+# GET CODE
+# Optionally: wget $url -> save in ${DOWNLOADS_DIR}/${VERSION}.tar.gz
+mkdir -p ${RELEASE} && tar -xzf ${DOWNLOADS_DIR}/${VERSION}.tar.gz -C ${RELEASE}

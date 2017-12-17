@@ -8,13 +8,13 @@ printf "${MAGENTO_DIR}/bin/magento maintenance:enable\n"
 printf "${GREEN}Enabled maintenance mode${COLOR_RESET}\n"
 
 printf "git pull\n"
-printf "wait...\n\n"
+printf "wait... ~10sec\n\n"
 sleep 2
 printf "composer install --no-dev\n"
 printf "wait... ~3min \n\n"
 sleep 2
 printf "${MAGENTO_DIR}/bin/magento setup:di:compile\n"
-printf "wait... ~2 min \n\n"
+printf "wait... ~2min \n\n"
 sleep 2
 printf "${MAGENTO_DIR}/bin/magento setup:static-content:deploy en_US de_CH\n"
 printf "wait... ~5min \n\n"

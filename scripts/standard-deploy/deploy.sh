@@ -61,8 +61,9 @@ if [[ 1 == ${UPGRADE_NEEDED} ]]; then
   	${LIVE}/${MAGERUN_BIN} db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
   	bin/magento setup:upgrade --keep-generated
 fi
-CONFIG_OUPUT=$(bin/magento config:set workaround/check/config_status 1) || echo ${CONFIG_OUPUT}
-if [[ ${CONFIG_OUPUT} == "This command is unavailable right now. To continue working with it please run app:config:import or setup:upgrade command before." ]]; then
+# NOTE: Workaround until "app:config:status" is available on Magento 2.2.3 
+CONFIG_OUTPUT=$(bin/magento config:set workaround/check/config_status 1) || echo ${CONFIG_OUTPUT}
+if [[ ${CONFIG_OUTPUT} == "This command is unavailable right now. To continue working with it please run app:config:import or setup:upgrade command before." ]]; then
 	bin/magento maintenance:enable
 	bin/magento app:config:import
 fi

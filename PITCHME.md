@@ -199,6 +199,13 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 ![Skip maintenance](assets/img/skip_maintenance.png)
 
 +++
+@title[Zero downtime commands]
+
+- setup:db:status
+- config:import:status (Magento >= 2.2.3)
+	- Gist with workaround
+
++++
 @title[Demo zero downtime]
 
 [Demo] 
@@ -208,13 +215,6 @@ Later update the deploy.sh to skip maintenance
 Mention that setup:upgrade always runs config:import, so if the first is needed we do not need to execute config:import again
 Show PR link
 -->
-
-+++
-@title[Zero downtime commands]
-
-- setup:db:status
-- config:import:status (Magento >= 2.2.3)
-	- Gist with workaround
 
 +++
 @title[Zero downtime accomplished]
