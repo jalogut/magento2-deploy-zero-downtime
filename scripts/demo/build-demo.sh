@@ -22,7 +22,7 @@ TYPE_SPEED_ORIG=${TYPE_SPEED}
 #
 # see http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html for escape sequences
 #
-DEMO_PROMPT="➜ ${WHITE} jalogut@demo-build-server "
+DEMO_PROMPT="➜ ${WHITE} build@demo-build-server "
 
 # hide the evidence
 clear
@@ -41,10 +41,21 @@ VERSION="1.2"
 p "VERSION=${VERSION} ~/simulation/build.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/build.sh
 
-pe "ls -lah"
+unset TYPE_SPEED
 pe "ls -lah ${VERSION}/${MAGENTO_DIR}/app/etc/"
-p "scp ${VERSION}.tar.gz alojua@mage.deploy.demo.com:downloads/"
+pe "ls -lah"
+
+p "ssh-copy-id lumashop@demo-live-server.jalogut.com"
+cat ${DIR}/simulation/logs/ssh-copy-id-2.log
+wait
+cat ${DIR}/simulation/logs/ssh-copy-id-3.log
+
+p "scp ${VERSION}.tar.gz lumashop@demo-live-server.jalogut.com:downloads/"
 mv ${WORKING_DIR}/${VERSION}.tar.gz ../live-server/downloads/
+sleep 4
+cat ${DIR}/simulation/logs/scp.log
+TYPE_SPEED=${TYPE_SPEED_ORIG}
+
+p ""
 
 cd ${WORKING_DIR}
-

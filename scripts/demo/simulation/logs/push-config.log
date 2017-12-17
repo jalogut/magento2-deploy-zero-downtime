@@ -1,0 +1,8 @@
+Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 558 bytes | 558.00 KiB/s, done.
+Total 6 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
+To https://github.com/jalogut/magento-2.2-demo.git
+   a240dc7..23e8b4a  develop -> develop

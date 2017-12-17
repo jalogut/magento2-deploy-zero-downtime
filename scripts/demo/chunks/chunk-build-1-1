@@ -1,0 +1,4 @@
+# CREATE ARTIFACT
+cd ${BUILD}
+ARTIFACT_FILENAME=../${VERSION}.tar.gz
+tar --exclude-from=../artifact.excludes -czf ${ARTIFACT_FILENAME} .
