@@ -253,7 +253,7 @@ bin/magento config:set workaround/check/config_status 1
 
 <br>
 
-Config in Build === Servers
+Config in Build === Config in Servers
 
 +++
 
@@ -324,7 +324,7 @@ magento2-config-dump-skip-system.xml: [https://gist.github.com/jalogut/](https:/
 
 <br>
 
-tests -> builds -> deploys
+tests &rarr; builds &rarr; deploys
 
 +++
 @title[Jenkins Tutorial]
@@ -339,15 +339,17 @@ Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://de
 
 <br>
 
-- build.sh -> Jenkins |
-- properties -> git |
-- deploy.sh -> Web Servers |
+- build.sh &rarr; Jenkins |
+- deploy.sh &rarr; Web Servers |
+- properties &rarr; git |
+
 
 +++
 #### Continuous Deployment
 
-Unique hash: deploy.sh
+Unique hash
 ```bash
+# deploy.sh
 if [[ ${VERSION} = "develop" ]]; then
     TARGET=${TARGET}-$(date +%s)
 fi
@@ -392,12 +394,12 @@ OPcache, Varnish, Redis, ...
 
 <br>
 
-Better caching:
+Better caching
 ```
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
-Parallel Downloads:
+Parallel Downloads
 ```
 composer global require hirak/prestissimo
 ```
@@ -423,21 +425,19 @@ cron:install --force
 +++ 
 #### Faster Static Files Deployment
 
-[Dev Docs](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html):
-
-Compact (up to 10x faster)
+[Compact Strategy](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html) (up to 10x faster)
 ```
 setup:static-content:deploy -f --strategy compact
 ```
 
-**Warning**: I didn't test it yet
+**Warning**: I didn't test it yet!
 
 +++
 
 #### DB Backup 
 
-<p><span class="menu-title slide-title">deploy.sh</span></p>
 ```bash
+# deploy.sh
 if [[ 1 == ${UPGRADE_NEEDED} ]]; then
   	bin/magento maintenance:enable
   	n98-magerun2 db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
@@ -452,29 +452,31 @@ fi
 @fa[arrow-down]
 
 +++
-#### app:config:dumps
+#### app:config:dump
 
 <br>
 
-- Dump only static: [PR #12410](https://github.com/magento/magento2/pull/12410)
-- Workaround:[https://gist.github.com/jalogut/](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9) -> magento2-config-dump-skip-system.xml
+Avoid dumping everything 
+
+- [PR #12410](https://github.com/magento/magento2/pull/12410)
+- [https://gist.github.com/jalogut/](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9) &rarr; magento2-config-dump-skip-system.xml
 
 +++
 
-#### Configuration by Environment
+#### Share DEV configuration
 
 <br>
 
-- [$_ENV variables](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) -> Cumbersome Solution
-- [PR #12361](https://github.com/magento/magento2/pull/12361) -> Allow Configuration by Environment
+- [Dev docs](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) &rarr; Cumbersome using $_ENV variables
+- [PR #12361](https://github.com/magento/magento2/pull/12361)
 
 +++
 #### Js translations
 
 <br>
 
-[#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) Still not fixed
-Run setup:static-content:deploy once per language
+- [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) Still not fixed
+- setup:static-content:deploy once per language
 
 +++
 #### Static deploy options ignored
@@ -504,7 +506,7 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 
 - Start small: zero downtime possible w/o build system |
 - Build pipeline allows new deployment strategies |
-- Pipeline issues: create a PR and be patient (Magento is not perfect) |
+- Pipeline issues: create a PR and be patient |
 
 ---
 @title[Resources]
@@ -521,14 +523,14 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 	- [Video](https://www.youtube.com/watch?v=nIFfn3YHkPs)
 	- [Slides](https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf)
 - MageDeploy2:
-	- [https://dev98.de -> Introducing MageDeploy2](https://dev98.de/2017/03/01/introducing-magedeploy2/)
+	- [https://dev98.de &rarr; Introducing MageDeploy2](https://dev98.de/2017/03/01/introducing-magedeploy2/)
 
 +++
 #### Deployments in General
 
 <br>
 
-[https://serversforhackers.com/](https://serversforhackers.com/) -> [DeployPHP](https://deploy.serversforhackers.com/)
+[https://serversforhackers.com/](https://serversforhackers.com/) &rarr; [DeployPHP](https://deploy.serversforhackers.com/)
 
 +++
 #### This Presentation
