@@ -365,16 +365,27 @@ RELEASE=${WORKING_DIR}/${TARGET}
 +++?code=scripts/build-jenkins/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
 @[29,31-32](Build Bundle)
-@[33,35-36](Always deploy Develop)
-@[39-40,42](Confirm tag and deploy)
-@[49,51-52,55,57-58](Confirm and deploy to Stage/Production)
+@[33,35-36](Always deploy develop)
+@[39-40,42](Confirm deploy)
+@[42](Tag version)
+@[51-52,54,57-58,60](Deploy to Stage/Production)
 
 +++
-@title[Jenkins Video]
+@title[Demo CD/CI]
+#### Demo CD/CI
 
-![YouTube Video](https://www.youtube.com/embed/qxPEcCca9tk)
+![YouTube Video](https://youtu.be/SSVqzb3844k)
 
 ---
+
++++
+@title[Demo Prod Deploy]
+#### Demo Prod Deploy
+
+![YouTube Video](https://youtu.be/Pe_b1OoIqn0)
+
+---
+
 @title[Tips]
 ## Tips! ✍️
 
