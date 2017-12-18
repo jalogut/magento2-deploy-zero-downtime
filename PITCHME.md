@@ -205,12 +205,13 @@ Proper Magento 2 Composer Setup: [https://blog.hauri.me/](https://blog.hauri.me/
 <br>
 
 - setup:db:status
-- config:import:status (>=2.2.3)
+- config:import:status (<span style="color:#f46f25">>= 2.2.3</span>)
 
 +++
 #### Workaround (config:import:status)
 
 <br>
+
 
 ```bash
 bin/magento config:set workaround/check/config_status 1
@@ -252,7 +253,7 @@ bin/magento config:set workaround/check/config_status 1
 
 <br>
 
-Config in Build == Servers
+Config in Build === Servers
 
 +++
 
@@ -338,16 +339,15 @@ Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://de
 
 <br>
 
-- build.sh -> Jenkins
-- properties -> git project
-- deploy.sh -> Web Servers
+- build.sh -> Jenkins |
+- properties -> git |
+- deploy.sh -> Web Servers |
 
 +++
-#### CD Unique hash
+#### Continuous Deployment
 
-deploy.sh
+Unique hash: deploy.sh
 ```bash
-TARGET=releases/${VERSION}
 if [[ ${VERSION} = "develop" ]]; then
     TARGET=${TARGET}-$(date +%s)
 fi
@@ -362,11 +362,10 @@ RELEASE=${WORKING_DIR}/${TARGET}
 
 +++?code=scripts/build-jenkins/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
-@[10,13,16](Get project and execute tests)
 @[29,31-32](Build Bundle)
 @[33,35-36](Always deploy Develop)
-@[40-42](Confirm tag and deploy)
-@[49,52,55,57](Confirm and deploy to Stage/Production)
+@[39-40,42](Confirm tag and deploy)
+@[49,51-52,55,57-58](Confirm and deploy to Stage/Production)
 
 +++
 @title[Jenkins Video]
@@ -393,10 +392,12 @@ OPcache, Varnish, Redis, ...
 
 <br>
 
+Better caching:
 ```
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
+Parallel Downloads:
 ```
 composer global require hirak/prestissimo
 ```
@@ -420,13 +421,16 @@ cron:install --force
 ```
 
 +++ 
-#### [Static files deployment strategies](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html):
+#### Faster Static Files Deployment
 
-- Standard
-- Quick
-- Compact (up to 10x faster)
+[Dev Docs](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html):
 
-**Warning**: I did not test it yet.
+Compact (up to 10x faster)
+```
+setup:static-content:deploy -f --strategy compact
+```
+
+**Warning**: I didn't test it yet
 
 +++
 
@@ -448,20 +452,29 @@ fi
 @fa[arrow-down]
 
 +++
-#### Local ENV Config
+#### app:config:dumps
 
 <br>
 
-- Cumbersome Solution: [Dev Docs](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
-- Configuration by Environment: [PR #12361](https://github.com/magento/magento2/pull/12361)
+- Dump only static: [PR #12410](https://github.com/magento/magento2/pull/12410)
+- Workaround:[https://gist.github.com/jalogut/](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9) -> magento2-config-dump-skip-system.xml
+
++++
+
+#### Configuration by Environment
+
+<br>
+
+- [$_ENV variables](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) -> Cumbersome Solution
+- [PR #12361](https://github.com/magento/magento2/pull/12361) -> Allow Configuration by Environment
 
 +++
 #### Js translations
 
 <br>
 
-- Still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
-- Workaround: <span style="font-size:0.6em; color:gray">run `setup:static-content:deploy` once per language</span>
+[#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) Still not fixed
+Run setup:static-content:deploy once per language
 
 +++
 #### Static deploy options ignored
@@ -474,7 +487,7 @@ setup:static-content:deploy -f --exclude-theme=Magento/blank
 ```
 
 ---
-## Out-of-the-box Tools
+#### Out-of-the-box Tools
 
 <br>
 
@@ -489,11 +502,11 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 
 <br>
 
-- Start small, Zero downtime possible w/o build system |
+- Start small: zero downtime possible w/o build system |
 - Build pipeline allows new deployment strategies |
-- Pipeline issues, create a PR and be patient (Magento is not perfect) |
+- Pipeline issues: create a PR and be patient (Magento is not perfect) |
 
-–––
+---
 @title[Resources]
 ## Resources
 
@@ -515,8 +528,7 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 
 <br>
 
-- Video course: [DeployPHP](https://deploy.serversforhackers.com/)
-	- [https://serversforhackers.com/](https://serversforhackers.com/)
+[https://serversforhackers.com/](https://serversforhackers.com/) -> [DeployPHP](https://deploy.serversforhackers.com/)
 
 +++
 #### This Presentation
