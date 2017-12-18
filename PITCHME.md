@@ -371,18 +371,16 @@ RELEASE=${WORKING_DIR}/${TARGET}
 @[51-52,54,57-58,60](Deploy to Stage/Production)
 
 +++
-@title[Demo CD/CI]
-#### Demo CD/CI
+@title[Demo CI/CD]
+#### CI/CD
 
-![YouTube Video](https://youtu.be/SSVqzb3844k)
-
----
+![YouTube Video](https://www.youtube.com/embed/SSVqzb3844k)
 
 +++
 @title[Demo Prod Deploy]
-#### Demo Prod Deploy
+#### STAGE/PROD Deploy
 
-![YouTube Video](https://youtu.be/Pe_b1OoIqn0)
+![YouTube Video](https://www.youtube.com/embed/Pe_b1OoIqn0)
 
 ---
 
