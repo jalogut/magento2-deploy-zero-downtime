@@ -16,7 +16,7 @@ sleep 2
 printf "${MAGENTO_DIR}/bin/magento setup:di:compile\n"
 printf "wait... ~2min \n\n"
 sleep 2
-printf "${MAGENTO_DIR}/bin/magento setup:static-content:deploy en_US de_CH\n"
+printf "${MAGENTO_DIR}/bin/magento setup:static-content:deploy en_US de_CH --exclude-theme=Magento/blank\n"
 printf "wait... ~5min \n\n"
 sleep 2
 printf "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;\n"

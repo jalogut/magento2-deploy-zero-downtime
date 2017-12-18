@@ -31,9 +31,9 @@ clear
 # Manually
 ########################
 PROMPT_TIMEOUT=0
-pe "ls -lah"
+pe "ls -l"
 pe "cd ${LIVE_DIRECTORY_ROOT}"
-pe "ls -lah"
+pe "ls -l"
 cd ${MAGENTO_DIR}
 pe "bin/magento maintenance:enable"
 cd ${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}
@@ -63,25 +63,29 @@ echo ""
 printf "${YELLOW}Release finish - Downtime: [15min - 30min]${COLOR_RESET}\n"
 
 cd ${WORKING_DIR}
+p ""
 
 ########################
 # Simple Automation
 ########################
-pe "clear"
+p ""
+clear
 pbcopy < ${DIR}/templates/deploy-0.sh
 pe "touch deploy.sh && open deploy.sh"
 pe "chmod +x deploy.sh"
-pe "ls -lah"
+pe "ls -l"
 
 p "~/simulation/deploy-0.sh"
 ${DIR}/simulation/scripts/deploy-0.sh
 
 cd ${WORKING_DIR}
+p ""
 
 ########################
 # Right Deployment
 ########################
-pe "clear"
+p ""
+clear
 PROMPT_TIMEOUT=0
 
 pe "mkdir releases"
@@ -112,11 +116,10 @@ ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/app/etc/env.php ${LIVE_DIRECTORY_ROO
 ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/pub/media ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media
 ln -sf ${WORKING_DIR}/shared/${MAGENTO_DIR}/var/log ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log
 
-TYPE_SPEED=${TYPE_SPEED_ORIG}
-pe "ls -lah"
-#pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/"
-#pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub"
-#pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var"
+pe "ls -l"
+pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
+pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
+pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
 
 pbcopy < ${DIR}/chunks/chunk-deploy-1-1
 sleep 1
@@ -126,8 +129,14 @@ pbcopy < ${DIR}/chunks/chunk-deploy-1-3
 sleep 1
 pbcopy < ${DIR}/chunks/chunk-deploy-1-4
 sleep 1
+pbcopy < ${DIR}/chunks/chunk-deploy-1-5
+sleep 1
 
+TYPE_SPEED=${TYPE_SPEED_ORIG}
 pe "open deploy.sh"
+p ""
+clear
+
 VERSION="1.0"
 p "VERSION=${VERSION} ~/simulation/deploy-1.sh"
 # --- Demo in one part
@@ -142,18 +151,21 @@ VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-3.sh
 wait
 # ---
 
-pe "ls -lah"
-pe "ls -lah releases"
+pe "ls -l"
+pe "ls -l releases"
 unset TYPE_SPEED
-pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
-pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
-pe "ls -lah ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
+pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
+pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
+pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
 TYPE_SPEED=${TYPE_SPEED_ORIG}
 
+cd ${WORKING_DIR}
+p ""
 ########################
 # Zero Downtime
 ########################
-pe "clear"
+p ""
+clear
 PROMPT_TIMEOUT=0
 
 p "open deploy.sh"
@@ -164,12 +176,14 @@ VERSION="1.1"
 p "VERSION=${VERSION} ~/simulation/deploy-2.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-2.sh
 
-pe "ls -lah && ls -lah releases"
+pe "ls -l && ls -l releases"
+p ""
 
 ########################
 # Build System
 ########################
-pe "clear"
+p ""
+clear
 PROMPT_TIMEOUT=0
 
 p "open deploy.sh"
@@ -177,14 +191,18 @@ pbcopy < ${DIR}/chunks/chunk-deploy-3-1
 sleep 1
 open deploy.sh
 pe "mkdir downloads"
+pbcopy < ${DIR}/chunks/chunk-deploy-3-1
+sleep 1
+pe "ls -l downloads"
 
 VERSION="1.2"
 p "VERSION=${VERSION} ~/simulation/deploy-3.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-3.sh
 
-pe "ls -lah && ls -lah releases"
+pe "ls -l && ls -l releases"
 
 cd ${WORKING_DIR}
+p ""
 
 
 

@@ -35,7 +35,8 @@ printf "${CYAN}CREATE ARTIFACT${COLOR_RESET}\n"
 echo "cd ${BUILD}"
 ARTIFACT_FILENAME=../${VERSION}.tar.gz
 echo "tar --exclude-from=../artifact.excludes -czf ${ARTIFACT_FILENAME} ."
+sleep 2
 echo ""
 
-printf "${YELLOW}Artifact created: "${ARTIFACT_FILENAME}" ${COLOR_RESET}\n"
+printf "${YELLOW}Artifact created: "${VERSION}.tar.gz" ${COLOR_RESET}\n"
 mv ${WORKING_DIR}/../demo-backups/builds/${VERSION}.tar.gz .

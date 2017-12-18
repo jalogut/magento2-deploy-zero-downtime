@@ -15,7 +15,7 @@
 * Right deployment
 * Zero Downtime
 * Build Pipeline
-* CI
+* CI/CD
 
 ---
 @title[Agenda 1]
@@ -26,7 +26,7 @@
 * <span style="opacity: 0.2;">Right deployment</span>
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
-* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">CI/CD</span>
 
 @fa[arrow-down]
 
@@ -56,7 +56,7 @@ Proper Magento 2 Composer Setup: [https://blog.hauri.me/](https://blog.hauri.me/
 
 <br>
 
-Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
+[https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
 
 ---
 @title[Agenda 2]
@@ -67,7 +67,7 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 * <span style="opacity: 0.2;">Right deployment</span>
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
-* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">CI/CD</span>
 
 @fa[arrow-down]
 
@@ -79,7 +79,7 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 [Demo]
 
 +++
-#### Manually
+#### Cons 👎
 
 <br>
 
@@ -95,7 +95,7 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 [Demo]
 
 +++
-#### Simple Automation
+#### Cons 👎
 
 <br>
 
@@ -111,7 +111,7 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 * **Right deployment**
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
-* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">CI/CD</span>
 
 @fa[arrow-down]
 
@@ -163,7 +163,7 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 [Demo]
 
 +++
-#### Pros
+#### Pros 👍
 
 <br>
 
@@ -188,7 +188,7 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 * <span style="opacity: 0.2;">Right deployment</span>
 * **Zero Downtime**
 * <span style="opacity: 0.2;">Build Pipeline</span>
-* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">CI/CD</span>
 
 @fa[arrow-down]
 
@@ -199,22 +199,28 @@ Magento 2.2 demo: [https://github.com/jalogut/magento-2.2-demo](https://github.c
 ![Skip maintenance](assets/img/skip_maintenance.png)
 
 +++
-@title[Zero downtime commands]
+@title[Commands]
+#### Commands
+
+<br>
 
 - setup:db:status
-- config:import:status (Magento >= 2.2.3)
-	- Gist with workaround
+- config:import:status (>=2.2.3)
+
++++
+#### Workaround (config:import:status)
+
+<br>
+
+```bash
+bin/magento config:set workaround/check/config_status 1
+# Check output == "please run app:config:import"
+```
 
 +++
 @title[Demo zero downtime]
 
-[Demo] 
-<!--
-First show in local, how the commands reacts when editing module.xml version and config.php
-Later update the deploy.sh to skip maintenance
-Mention that setup:upgrade always runs config:import, so if the first is needed we do not need to execute config:import again
-Show PR link
--->
+[Demo]
 
 +++
 @title[Zero downtime accomplished]
@@ -231,7 +237,7 @@ Show PR link
 * <span style="opacity: 0.2;">Right deployment</span>
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * **Build Pipeline**
-* <span style="opacity: 0.2;">CI</span>
+* <span style="opacity: 0.2;">CI/CD</span>
 
 @fa[arrow-down]
 
@@ -246,7 +252,7 @@ Show PR link
 
 <br>
 
-Config used for Bundle same as servers
+Config in Build == Servers
 
 +++
 
@@ -254,20 +260,12 @@ Config used for Bundle same as servers
 
 <br>
 
-Config Propagation
+Config propagation in files
 
 +++
+@title[config.php]
 
-#### Magento 2.2
-
-<br>
-
-- etc/config.php
-- app:config:dump
-
-+++
-
-![Config.php](assets/img/config_dump_system.png)
+![config.php](assets/img/config_dump_system.png)
 
 +++
 
@@ -277,22 +275,19 @@ Config Propagation
 
 +++
 
-#### Up-Vote PR! 👍
+#### Up-Vote PR! 🙌
 
 <br>
 
-- Skip dumping all settings: [PR #12410](https://github.com/magento/magento2/pull/12410)
-- Workaround: [gist magento2-config-dump-skip-system.xml](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9)
+- Dump only static: [PR #12410](https://github.com/magento/magento2/pull/12410)
 
 +++
 
-#### Update config.php if changes on:
+#### Workaround: 
 
 <br>
 
-- Scopes (website, stores)
-- Theme 
-- Web assets config
+magento2-config-dump-skip-system.xml: [https://gist.github.com/jalogut/](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9)
 
 +++
 
@@ -305,8 +300,8 @@ Config Propagation
 <br>
 
 - Save CPU during deployment
-- Identify file generation issues right away |
-- Common bundle to share amongst Envs |
+- Identify files generation issues right away |
+- Common bundle to share amongst Servers |
 - History for auditing or back in time checks | 
 
 ---
@@ -318,17 +313,17 @@ Config Propagation
 * <span style="opacity: 0.2;">Right deployment</span>
 * <span style="opacity: 0.2;">Zero Downtime</span>
 * <span style="opacity: 0.2;">Build Pipeline</span>
-* **CI**
+* **CI/CD**
 
 @fa[arrow-down]
 
 +++
 
-#### One system for all
+#### Automate
 
 <br>
 
-Automatically: Tests -> builds -> deploys
+tests -> builds -> deploys
 
 +++
 @title[Jenkins Tutorial]
@@ -338,29 +333,40 @@ Automatically: Tests -> builds -> deploys
 
 Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://dev.to/jalogut/setup-continuos-integrationdelivery-system-in-just-4-steps-with-jenkins-pipelines-and-blue-ocean)
 
-+++?code=scripts/build-jenkins/build.sh&lang=bash&title=Source: Jenkins build.sh
++++
+#### Files
 
-@[17-18](Properties and excludes project specific)
-@[25-28](Git clone not needed. Jenkins gets it automatically)
+<br>
 
-+++?code=scripts/build-deploy/deploy.sh&lang=bash&title=Source: deploy.sh
+- build.sh -> Jenkins
+- properties -> git project
+- deploy.sh -> Web Servers
 
-@[33-35](Timestamp name for develop releases)
++++
+#### CD Unique hash
+
+deploy.sh
+```bash
+TARGET=releases/${VERSION}
+if [[ ${VERSION} = "develop" ]]; then
+    TARGET=${TARGET}-$(date +%s)
+fi
+RELEASE=${WORKING_DIR}/${TARGET}
+```
 
 +++
 @title[Jenkins project example]
-#### Jenkins Example
 
 [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
 ![Jenking project example](assets/img/jenkins_project_example.png)
 
 +++?code=scripts/build-jenkins/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
-@[10-12,13,16](Get project and execute tests)
-@[29-32](Build Bundle)
-@[33-38](Always deploy Develop)
+@[10,13,16](Get project and execute tests)
+@[29,31-32](Build Bundle)
+@[33,35-36](Always deploy Develop)
 @[40-42](Confirm tag and deploy)
-@[49-50,55-56](Confirm and deploy to Stage/Production)
+@[49,52,55,57](Confirm and deploy to Stage/Production)
 
 +++
 @title[Jenkins Video]
@@ -369,47 +375,37 @@ Setup Continuos Integration/Delivery system: [https://dev.to/jalogut](https://de
 
 ---
 @title[Tips]
-## Tips
+## Tips! ✍️
 
 @fa[arrow-down]
 
 +++
+#### Flush all caches
+
+<br>
+
+OPcache, Varnish, Redis, ...
+
++++
+
 @title[Composer Tweaks]
+#### Speed up Composer
 
-<p><span class="menu-title slide-title">Source: Composer.json</span></p>
-
-```json
-  "config": {
-    "preferred-install": {
-      "<your_vendor>/*": "source",
-      "*": "dist"
-    }
-  },
+<br>
 
 ```
+composer install --no-dev --prefer-dist --optimize-autoloader
+```
 
-`composer install --no-dev --prefer-dist`
-
-`--prefer-dist` caches better.
-
-+++
-
-Also use `--optimize-autoloader` for servers. It generates autoloader faster. Do not use in development.
-
-`composer install --no-dev --prefer-dist --optimize-autoloader`
-
-+++
-
-#### Composer parallel downloads
-
-`composer global require hirak/prestissimo`
+```
+composer global require hirak/prestissimo
+```
 
 +++
 #### Update crontab automatically
 
-`bin/magento cron:install --force`
+cron:install --force
 
-di.xml
 ```xml
 <type name="Magento\Framework\Crontab\TasksProviderInterface">
     <arguments>
@@ -424,18 +420,11 @@ di.xml
 ```
 
 +++ 
-#### Static Files Strategies
-
-[http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html)
+#### [Static files deployment strategies](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html):
 
 - Standard
 - Quick
-- Compact
-
-According to docs:
-
-`bin/magento setup:static-content:deploy -f --strategy compact`
--> 3 locales x2 faster; 15 locales x10 faster – due to less disk I/O
+- Compact (up to 10x faster)
 
 **Warning**: I did not test it yet.
 
@@ -443,49 +432,23 @@ According to docs:
 
 #### DB Backup 
 
-<p><span class="menu-title slide-title">Source: deploy.sh</span></p>
+<p><span class="menu-title slide-title">deploy.sh</span></p>
 ```bash
 if [[ 1 == ${UPGRADE_NEEDED} ]]; then
   	bin/magento maintenance:enable
-  	${LIVE}/${MAGERUN_BIN} db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
+  	n98-magerun2 db:dump --compression='gzip' ${WORKING_DIR}/backups/live-$(date +%s).sql.gz
   	bin/magento setup:upgrade --keep-generated
 fi
 ```
 
-+++
-#### Use Tools
-
-<br>
-All this OUT-OF-THE-BOX
-
-[magento2-builder-tool](https://github.com/staempfli/magento2-builder-tool)
-[magento2-deployment-tool](https://github.com/staempfli/magento2-deployment-tool)
-
-Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-builder)
-
 ---
 @title[Issues]
-## Issues
+## Issues 🤕
 
 @fa[arrow-down]
 
 +++
-#### Magento cache is not enough
-
-<br>
-
-Flush all caches after release: OPcache, Varnish, Redis, ...
-
-+++
-#### Dump Configuration
-
-<br>
-
-- Skip dumping all settings: [PR #12410](https://github.com/magento/magento2/pull/12410)
-- Workaround: [gist magento2-config-dump-skip-system.xml](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9)
-
-+++
-#### Local core_config_data
+#### Local ENV Config
 
 <br>
 
@@ -493,30 +456,32 @@ Flush all caches after release: OPcache, Varnish, Redis, ...
 - Configuration by Environment: [PR #12361](https://github.com/magento/magento2/pull/12361)
 
 +++
-#### Static deploy and Js translations
+#### Js translations
 
 <br>
 
-- Issue still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
-- Workaround: run `setup:static-content:deploy` once per language 
+- Still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
+- Workaround: <span style="font-size:0.6em; color:gray">run `setup:static-content:deploy` once per language</span>
 
 +++
 #### Static deploy options ignored
 
 <br>
 
-`setup:static-content:deploy -f --exclude-theme=Magento/blank` 
+Doesn't exclude the theme
+```
+setup:static-content:deploy -f --exclude-theme=Magento/blank
+```
 
-- doesn't exclude the theme
+---
+## Out-of-the-box Tools
 
-+++
-#### Rollbacks
+<br>
 
-TODO GRAPH
+- [magento2-builder-tool](https://github.com/staempfli/magento2-builder-tool)
+- [magento2-deployment-tool](https://github.com/staempfli/magento2-deployment-tool)
 
-<!-- * While rare, Rollback are sometimes needed. You can automate that although I would not recomend it. It is always better to release a new hotfix version than rolling back. Anyway, if for any reason you need to do it, you need to:
-    * Check setup:upgrade and config:import:status. If green then switch symlinks and update caches. 
-    * If red, enable maintenance, setup_modules back or config:import, switch, clear cache and disable maintenance. -->
+Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-builder)
 
 ---
 @title[Take aways]
@@ -524,11 +489,9 @@ TODO GRAPH
 
 <br>
 
-- Start easy, you can accomplish 0 downtime even w/o a build system (very convenient for small project w/o autatic tests) |
-- Build pipeline if a step forward for better deployment strategies |
-- App:config commands are not mature yet. |
+- Start small, Zero downtime possible w/o build system |
+- Build pipeline allows new deployment strategies |
 - Pipeline issues, create a PR and be patient (Magento is not perfect) |
-- Automate your deployments using a tool. Bash scripts were only for the demo |
 
 –––
 @title[Resources]
@@ -544,29 +507,31 @@ TODO GRAPH
 - Alan Kent - Magento 2.2 deployment:
 	- [Video](https://www.youtube.com/watch?v=nIFfn3YHkPs)
 	- [Slides](https://info2.magento.com/rs/585-GGD-959/images/The%20New%20Magento%202.2%20Deployment%20Capabilities%20%26%20Patterns.pdf)
-- MageDeploy2 (https://dev98.de -> Introducing MageDeploy2)[https://dev98.de/2017/03/01/introducing-magedeploy2/]
+- MageDeploy2:
+	- [https://dev98.de -> Introducing MageDeploy2](https://dev98.de/2017/03/01/introducing-magedeploy2/)
 
 +++
 #### Deployments in General
 
 <br>
 
-Chris Fidao video-course: [DeployPHP](https://deploy.serversforhackers.com/)
+- Video course: [DeployPHP](https://deploy.serversforhackers.com/)
+	- [https://serversforhackers.com/](https://serversforhackers.com/)
 
 +++
 #### This Presentation
 
-- Slides: [https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)
+- Slides: <span style="font-size:0.6em;">[https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)</span>
 
-- Scripts: [https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)
+- Scripts: <span style="font-size:0.6em;">[https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)</span>
 
-- Project Example: [https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)
+- Project Example: <span style="font-size:0.6em;">[https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)</span>
 
 
 ---
 @title[thank you]
 
-##Thanks
+## Thanks
 
 <br>
 

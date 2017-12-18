@@ -1,7 +1,7 @@
 set -eu
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source ${DIR}/../../properties.sh
+source ${DIR}/../../../properties.sh
 
 GIT_REPO=https://github.com/jalogut/magento-2.2-demo.git
 LIVE=${WORKING_DIR}/${LIVE_DIRECTORY_ROOT}

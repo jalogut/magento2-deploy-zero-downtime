@@ -30,46 +30,53 @@ clear
 PROJECT_NAME='luma-shop'
 
 # Start
-pe "ls -lah"
-pe "cd ${PROJECT_NAME}"
+pe "ls -l"
+pe "cd ${PROJECT_NAME}/${MAGENTO_DIR}"
 
 # ====================
 # Skip maintenance
 # ====================
-: '
 unset TYPE_SPEED
-pe "vim ${MAGENTO_DIR}/setup/src/Magento/Setup/Console/Command/DbStatusCommand.php"
+pe "vim setup/src/Magento/Setup/Console/Command/DbStatusCommand.php"
 # pe "vim ${MAGENTO_DIR}/app/code/Demo/Settings/etc/module.xml"
 # pe "${MAGENTO_DIR}/bin/magento setup:db:status"
 
 TYPE_SPEED=${TYPE_SPEED_ORIG}
-pe "vim ${MAGENTO_DIR}/app/etc/config.php"
-outputCache=$(${MAGENTO_DIR}/bin/magento c:c)
-pe "${MAGENTO_DIR}/bin/magento app:config:import"
+pe "vim app/etc/config.php"
+outputCache=$(bin/magento c:c)
+pe "bin/magento app:config:import"
 
-pe "${MAGENTO_DIR}/bin/magento | grep config:"
-pe "${MAGENTO_DIR}/bin/magento config:set path/non_existing 1"
+pe "bin/magento | grep config:"
+pe "bin/magento config:set path/non_existing 1"
 
 unset TYPE_SPEED
-pe "vim ${MAGENTO_DIR}/app/etc/config.php"
-pe "${MAGENTO_DIR}/bin/magento config:set path/non_existing 1"
+pe "vim app/etc/config.php"
+pe "bin/magento config:set path/non_existing 1"
 
-outputConfigImport=$(${MAGENTO_DIR}/bin/magento app:config:import)
+outputConfigImport=$(bin/magento app:config:import)
 TYPE_SPEED=${TYPE_SPEED_ORIG}
-'
+
+p ""
+
 # ====================
 # Dump config for Build
 # ====================
-p "${MAGENTO_DIR}/bin/magento app:config:dump"
-rm ${MAGENTO_DIR}/app/code/Demo/Settings/etc/di.xml
-outputConfigImport=$(${MAGENTO_DIR}/bin/magento c:c)
-${MAGENTO_DIR}/bin/magento app:config:dump
+p ""
+clear
 
-pe "open ${MAGENTO_DIR}/app/etc/config.php"
+p "bin/magento app:config:dump"
+rm app/code/Demo/Settings/etc/di.xml
+outputConfigImport=$(bin/magento c:c)
+bin/magento app:config:dump
+
+pe "open app/etc/config.php"
+
+p ""
+clear
 pe "git reset --hard"
-rm ${MAGENTO_DIR}/app/code/Demo/Settings/etc/di.xml
-cat ${DIR}/chunks/chunk-local-1-0 > ${MAGENTO_DIR}/app/etc/config.php
-pe "open ${MAGENTO_DIR}/app/etc/config.php"
+rm app/code/Demo/Settings/etc/di.xml
+cat ${DIR}/chunks/chunk-local-1-0 > app/etc/config.php
+pe "open app/etc/config.php"
 
 pbcopy < ${DIR}/chunks/chunk-local-1-1
 sleep 1
@@ -88,3 +95,5 @@ p "git push"
 cat ${DIR}/simulation/logs/push-config.log
 
 cd ${WORKING_DIR}
+
+p ""

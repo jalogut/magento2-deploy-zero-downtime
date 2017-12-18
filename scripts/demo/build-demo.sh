@@ -27,7 +27,7 @@ DEMO_PROMPT="➜ ${WHITE} build@demo-build-server "
 # hide the evidence
 clear
 
-pe "ls -lah"
+pe "ls -l"
 pbcopy < ${DIR}/chunks/chunk-build-1-1
 sleep 1
 pe "touch build.sh && open build.sh"
@@ -42,8 +42,11 @@ p "VERSION=${VERSION} ~/simulation/build.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/build.sh
 
 unset TYPE_SPEED
-pe "ls -lah ${VERSION}/${MAGENTO_DIR}/app/etc/"
-pe "ls -lah"
+#pe "ls -l ${VERSION}/${MAGENTO_DIR}/app/etc/"
+pe "ls -l"
+
+p ""
+clear
 
 p "ssh-copy-id lumashop@demo-live-server.jalogut.com"
 cat ${DIR}/simulation/logs/ssh-copy-id-2.log
@@ -56,6 +59,6 @@ sleep 4
 cat ${DIR}/simulation/logs/scp.log
 TYPE_SPEED=${TYPE_SPEED_ORIG}
 
-p ""
-
 cd ${WORKING_DIR}
+
+p ""
