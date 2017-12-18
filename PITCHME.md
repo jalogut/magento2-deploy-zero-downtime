@@ -372,13 +372,13 @@ RELEASE=${WORKING_DIR}/${TARGET}
 
 +++
 @title[Demo CI/CD]
-#### CI/CD
+CI/CD
 
 ![YouTube Video](https://www.youtube.com/embed/SSVqzb3844k)
 
 +++
 @title[Demo Prod Deploy]
-#### STAGE/PROD Deploy
+STAGE/PROD Deploy
 
 ![YouTube Video](https://www.youtube.com/embed/Pe_b1OoIqn0)
 
