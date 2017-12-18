@@ -425,6 +425,8 @@ cron:install --force
 +++ 
 #### Faster Static Files Deployment
 
+<br>
+
 [Compact Strategy](http://devdocs.magento.com/guides/v2.2/config-guide/cli/config-cli-subcommands-static-deploy-strategies.html) (up to 10x faster)
 ```
 setup:static-content:deploy -f --strategy compact
@@ -456,9 +458,7 @@ fi
 
 <br>
 
-Avoid dumping everything 
-
-- [PR #12410](https://github.com/magento/magento2/pull/12410)
+- Avoid dumping everything: [PR #12410](https://github.com/magento/magento2/pull/12410)
 - [https://gist.github.com/jalogut/](https://gist.github.com/jalogut/d72e0af6e10c502bff90423e66bf07b9) &rarr; magento2-config-dump-skip-system.xml
 
 +++
@@ -467,16 +467,16 @@ Avoid dumping everything
 
 <br>
 
-- [Dev docs](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) &rarr; Cumbersome using $_ENV variables
-- [PR #12361](https://github.com/magento/magento2/pull/12361)
+- Cumbersome using *$_ENV* variables: [Dev docs](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
+- Allow configuration by Env: [PR #12361](https://github.com/magento/magento2/pull/12361)
 
 +++
 #### Js translations
 
 <br>
 
-- [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) Still not fixed
-- setup:static-content:deploy once per language
+- Still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) Still not fixed
+- `setup:static-content:deploy` once per language
 
 +++
 #### Static deploy options ignored
@@ -535,11 +535,14 @@ Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-buil
 +++
 #### This Presentation
 
-- Slides: <span style="font-size:0.6em;">[https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)</span>
+- Slides: 
+<span style="font-size:0.6em;">[https://gitpitch.com/jalogut/magento2-deploy-zero-downtime](https://gitpitch.com/jalogut/magento2-deploy-zero-downtime)</span>
 
-- Scripts: <span style="font-size:0.6em;">[https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)</span>
+- Scripts: 
+<span style="font-size:0.6em;">[https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts](https://github.com/jalogut/magento2-deploy-zero-downtime/tree/master/scripts)</span>
 
-- Project Example: <span style="font-size:0.6em;">[https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)</span>
+- Project Example: 
+<span style="font-size:0.6em;">[https://github.com/jalogut/magento-2.2-demo](https://github.com/jalogut/magento-2.2-demo)</span>
 
 
 ---
