@@ -37,11 +37,13 @@ pe "cd ${PROJECT_NAME}/${MAGENTO_DIR}"
 # Skip maintenance
 # ====================
 unset TYPE_SPEED
+pe "bin/magento setup:db:status"
+pe "vim app/code/Demo/Settings/etc/module.xml"
+pe "bin/magento setup:db:status"
+pe "vim app/code/Demo/Settings/etc/module.xml"
 pe "vim setup/src/Magento/Setup/Console/Command/DbStatusCommand.php"
-# pe "vim ${MAGENTO_DIR}/app/code/Demo/Settings/etc/module.xml"
-# pe "${MAGENTO_DIR}/bin/magento setup:db:status"
-
 TYPE_SPEED=${TYPE_SPEED_ORIG}
+
 pe "vim app/etc/config.php"
 outputCache=$(bin/magento c:c)
 pe "bin/magento app:config:import"
