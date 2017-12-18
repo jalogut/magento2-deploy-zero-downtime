@@ -367,7 +367,7 @@ RELEASE=${WORKING_DIR}/${TARGET}
 @[29,31-32](Build Bundle)
 @[33,35-36](Always deploy develop)
 @[39-40,42](Confirm deploy)
-@[42](Tag version)
+@[43,44](Tag version)
 @[51-52,54,57-58,60](Deploy to Stage/Production)
 
 +++
