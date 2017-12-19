@@ -50,13 +50,15 @@ pe "vim app/code/Demo/Settings/etc/module.xml"
 # pe "vim setup/src/Magento/Setup/Console/Command/DbStatusCommand.php"
 TYPE_SPEED=${TYPE_SPEED_ORIG}
 
-pe "vim app/etc/config.php"
-outputCache=$(MAGENTO_DIR=. ${DIR}/simulation/scripts/cache-flush.sh)
-p "bin/magento app:config:import"
-sleep 2
-printf "${GREEN}Processing configurations data from configuration file...${COLOR_RESET}\n"
-printf "System config was processed\n"
-output=$(git reset --hard)
+p ""
+
+# pe "vim app/etc/config.php"
+# outputCache=$(MAGENTO_DIR=. ${DIR}/simulation/scripts/cache-flush.sh)
+# p "bin/magento app:config:import"
+# sleep 2
+# printf "${GREEN}Processing configurations data from configuration file...${COLOR_RESET}\n"
+# printf "System config was processed\n"
+# output=$(git reset --hard)
 
 p "bin/magento | grep config:"
 echo "  app:config:dump                          Create dump of application
@@ -73,10 +75,12 @@ printf "${BackRed}The \"path/non_existing\" path does not exist${COLOR_RESET}\n"
 TYPE_SPEED=${TYPE_SPEED_ORIG}
 
 unset TYPE_SPEED
-cat ${DIR}/chunks/chunk-local-1-0 > app/etc/config.php
+# cat ${DIR}/chunks/chunk-local-1-0 > app/etc/config.php
 pe "vim app/etc/config.php"
+outputCache=$(MAGENTO_DIR=. ${DIR}/simulation/scripts/cache-flush.sh)
 p "bin/magento config:set path/non_existing 1"
 printf "${BackRed}This command is unavailable right now. To continue working with it please run app:config:import or setup:upgrade command before.${COLOR_RESET}\n"
+pe "vim app/etc/config.php"
 
 output=$(git reset --hard)
 TYPE_SPEED=${TYPE_SPEED_ORIG}
