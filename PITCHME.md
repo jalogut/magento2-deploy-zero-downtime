@@ -365,7 +365,7 @@ RELEASE=${WORKING_DIR}/${TARGET}
 +++?code=scripts/build-jenkins/Jenkinsfile&lang=groovy&title=Source: Jenkinsfile
 
 @[29,31-32](Build Bundle)
-@[33,35-36](Always deploy develop)
+@[33-36](Always deploy develop)
 @[39-40,42](Confirm deploy)
 @[43,44](Tag version)
 @[51-54,57-60](Deploy to Stage/Production)
