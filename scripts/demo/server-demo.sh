@@ -152,14 +152,14 @@ p "VERSION=${VERSION} ./deploy.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-1.sh
 wait
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-2.sh
-$(MAGENTO_DIR=${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR} ${DIR}/simulation/scripts/maintenance-set.sh)
+output=${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR} ${DIR}/simulation/scripts/maintenance-set.sh)
 wait
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-3.sh
 # ---
 
 unset TYPE_SPEED
 pe "ls -l && ls -l releases"
-pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
+p "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/app/etc/env.php"
 echo "lrwxr-xr-x  1 alojua  989599490  67 19 Dez 02:17 public_html/magento/app/etc/env.php -> ../../../../shared/magento/app/etc/env.php"
 # pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/pub/media"
 # pe "ls -l ${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/var/log"
@@ -202,6 +202,7 @@ pe "mkdir downloads"
 pbcopy < ${DIR}/chunks/chunk-deploy-3-1
 sleep 1
 pe "ls -l downloads"
+pe "open deploy.sh"
 
 VERSION="1.2"
 p "VERSION=${VERSION} ./deploy.sh"

@@ -96,10 +96,10 @@ clear
 p "bin/magento app:config:dump"
 rm app/code/Demo/Settings/etc/di.xml
 outputConfigImport=$(MAGENTO_DIR=. ${DIR}/simulation/scripts/cache-flush.sh)
+sleep 2
 cat ${DIR}/simulation/logs/config-dump.log
 printf "${GREEN}Done.${COLOR_RESET}\n"
 cat ${DIR}/chunks/chunk-local-1-1 > app/etc/config.php
-sleep 3
 pe "open app/etc/config.php"
 
 p ""
@@ -114,16 +114,18 @@ sleep 1
 unset TYPE_SPEED
 pe "vim app/code/Demo/Settings/etc/di.xml"
 p "bin/magento cache:flush"
+sleep 2
 MAGENTO_DIR=. ${DIR}/simulation/scripts/cache-flush.sh
 p "bin/magento app:config:dump"
 cat ${DIR}/chunks/chunk-local-1-4 > app/etc/config.php
-printf "${GREEN}Done.${COLOR_RESET}\n"
 pbcopy < ${DIR}/chunks/chunk-local-1-5
 sleep 1
+printf "${GREEN}Done.${COLOR_RESET}\n"
+
 pe "open app/etc/config.php"
 
 TYPE_SPEED=${TYPE_SPEED_ORIG}
-p "git commit -am'Dump config to minify assets'"
+p "git commit -am'minify assets configuration'"
 cat ${DIR}/simulation/logs/commit-config.log
 p "git push"
 cat ${DIR}/simulation/logs/push-config.log

@@ -116,13 +116,6 @@ return array (
   'i18n' => 
   array (
   ),
-  /**
-   * For the section: skipSystem
-   * skipComments
-   */
-  'skipSystem' => 
-  array (
-  ),
   'scopes' => 
   array (
     'websites' => 
