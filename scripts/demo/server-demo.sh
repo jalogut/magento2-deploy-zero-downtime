@@ -152,7 +152,7 @@ p "VERSION=${VERSION} ./deploy.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-1.sh
 wait
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-2.sh
-output=${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR} ${DIR}/simulation/scripts/maintenance-set.sh)
+output=$(MAGENTO_DIR=${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR} ${DIR}/simulation/scripts/maintenance-set.sh)
 wait
 VERSION=${VERSION} ${DIR}/simulation/scripts/deploy-1/deploy-1-3.sh
 # ---

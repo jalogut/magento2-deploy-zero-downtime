@@ -10,11 +10,11 @@ TARGET=releases/${VERSION}
 printf "${CYAN}GET CODE${COLOR_RESET}\n"
 echo "git clone --depth 1 --branch ${VERSION} ${GIT_REPO} ${TARGET}"
 printf "wait... ~10sec \n"
-sleep 2
+sleep 1
 echo "cd ${TARGET}"
 echo "composer install --no-dev --prefer-dist --optimize-autoloader"
 printf "wait... ~4min \n"
-sleep 2
+sleep 1
 echo ""
 
 printf "${CYAN}SYMLINKS SHARED${COLOR_RESET}\n"
@@ -29,13 +29,13 @@ printf "${CYAN}GENERATE FILES${COLOR_RESET}\n"
 echo "cd ${TARGET}/${MAGENTO_DIR}"
 echo "bin/magento setup:di:compile"
 printf "wait... ~2min \n"
-sleep 2
+sleep 1
 echo "bin/magento setup:static-content:deploy en_US de_CH --exclude-theme=Magento/blank"
 printf "wait... ~5min \n"
-sleep 3
+sleep 2
 echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;"
 printf "wait... ~3min \n"
-sleep 2
+sleep 1
 echo ""
 
 printf "${CYAN}DATABASE UPDATE${COLOR_RESET}\n"
