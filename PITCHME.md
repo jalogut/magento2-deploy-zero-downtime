@@ -394,7 +394,7 @@ STAGE/PROD Deploy
 
 <br>
 
-OPcache, Varnish, Redis, ...
+OPcache, Varnish, ...
 
 +++
 
