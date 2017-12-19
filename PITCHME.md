@@ -484,7 +484,7 @@ fi
 
 <br>
 
-- Still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html) Still not fixed
+- Still not fixed: [#10673](http://devdocs.magento.com/guides/v2.2/config-guide/prod/config-reference-var-name.html)
 - `setup:static-content:deploy` once per language
 
 +++
