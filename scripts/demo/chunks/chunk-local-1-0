@@ -113,4 +113,136 @@ return array (
     'Magento_Wishlist' => 1,
     'Shopial_Facebook' => 1,
   ),
+  'i18n' => 
+  array (
+  ),
+  /**
+   * For the section: skipSystem
+   * skipComments
+   */
+  'skipSystem' => 
+  array (
+  ),
+  'scopes' => 
+  array (
+    'websites' => 
+    array (
+      'admin' => 
+      array (
+        'website_id' => '0',
+        'code' => 'admin',
+        'name' => 'Admin',
+        'sort_order' => '0',
+        'default_group_id' => '0',
+        'is_default' => '0',
+      ),
+      'base' => 
+      array (
+        'website_id' => '1',
+        'code' => 'base',
+        'name' => 'Main Website',
+        'sort_order' => '0',
+        'default_group_id' => '1',
+        'is_default' => '1',
+      ),
+    ),
+    'groups' => 
+    array (
+      0 => 
+      array (
+        'group_id' => '0',
+        'website_id' => '0',
+        'code' => 'default',
+        'name' => 'Default',
+        'root_category_id' => '0',
+        'default_store_id' => '0',
+      ),
+      1 => 
+      array (
+        'group_id' => '1',
+        'website_id' => '1',
+        'code' => 'main_website_store',
+        'name' => 'Main Website Store',
+        'root_category_id' => '2',
+        'default_store_id' => '1',
+      ),
+    ),
+    'stores' => 
+    array (
+      'admin' => 
+      array (
+        'store_id' => '0',
+        'code' => 'admin',
+        'website_id' => '0',
+        'group_id' => '0',
+        'name' => 'Admin',
+        'sort_order' => '0',
+        'is_active' => '1',
+      ),
+      'default' => 
+      array (
+        'store_id' => '1',
+        'code' => 'default',
+        'website_id' => '1',
+        'group_id' => '1',
+        'name' => 'Default Store View',
+        'sort_order' => '0',
+        'is_active' => '1',
+      ),
+    ),
+  ),
+  'themes' => 
+  array (
+    'frontend/Magento/blank' => 
+    array (
+      'parent_id' => NULL,
+      'theme_path' => 'Magento/blank',
+      'theme_title' => 'Magento Blank',
+      'is_featured' => '0',
+      'area' => 'frontend',
+      'type' => '0',
+      'code' => 'Magento/blank',
+    ),
+    'frontend/Magento/luma' => 
+    array (
+      'parent_id' => 'Magento/blank',
+      'theme_path' => 'Magento/luma',
+      'theme_title' => 'Magento Luma',
+      'is_featured' => '0',
+      'area' => 'frontend',
+      'type' => '0',
+      'code' => 'Magento/luma',
+    ),
+    'adminhtml/Magento/backend' => 
+    array (
+      'parent_id' => NULL,
+      'theme_path' => 'Magento/backend',
+      'theme_title' => 'Magento 2 backend',
+      'is_featured' => '0',
+      'area' => 'adminhtml',
+      'type' => '0',
+      'code' => 'Magento/backend',
+    ),
+  ),
+  'system' => 
+  array (
+    'default' => 
+    array (
+      'dev' => 
+      array (
+        'js' => 
+        array (
+          'minify_files' => '1',
+        ),
+        'css' => 
+        array (
+          'minify_files' => '0',
+        ),
+        'static' => 
+        array (
+          'sign' => '1',
+        ),
+      ),
+    ),
+  )
 );

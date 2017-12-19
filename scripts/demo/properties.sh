@@ -20,6 +20,9 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
+# Backgrounds
+BackRed='\e[41m'
+
 # DIRS
 WORKING_DIR=`pwd`
 LIVE_DIRECTORY_ROOT='public_html'

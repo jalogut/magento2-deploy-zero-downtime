@@ -368,7 +368,7 @@ RELEASE=${WORKING_DIR}/${TARGET}
 @[33,35-36](Always deploy develop)
 @[39-40,42](Confirm deploy)
 @[43,44](Tag version)
-@[51-52,54,57-58,60](Deploy to Stage/Production)
+@[51-54,57-60](Deploy to Stage/Production)
 
 +++
 @title[Demo CI/CD]

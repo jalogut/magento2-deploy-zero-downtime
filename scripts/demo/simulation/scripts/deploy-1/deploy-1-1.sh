@@ -29,3 +29,6 @@ printf "${CYAN}GENERATE FILES${COLOR_RESET}\n"
 echo "cd ${TARGET}/${MAGENTO_DIR}"
 echo "bin/magento setup:di:compile"
 printf "wait... ~2min \n"
+echo "bin/magento setup:static-content:deploy en_US de_CH --exclude-theme=Magento/blank"
+printf "wait... ~5min \n"
+sleep 6

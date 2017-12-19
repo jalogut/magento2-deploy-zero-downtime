@@ -1,0 +1,28 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Patch no dump system settings
+        https://github.com/magento/magento2/pull/12410
+    -->
+    <virtualType name="skipDumpSystemSource" type="Magento\Config\App\Config\Source\DumpConfigSourceAggregated">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+            </argument>
+            <argument name="rules" xsi:type="array">
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Deploy\Console\Command\App\ApplicationDumpCommand">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+                <item name="system" xsi:type="array">
+                    <item name="source" xsi:type="object">skipDumpSystemSource</item>
+                    <item name="namespace" xsi:type="string">skipSystem</item>
+                    <item name="comment" xsi:type="string"></item>
+                </item>
+                <item name="system_env" xsi:type="array">
+                    <item name="source" xsi:type="object">skipDumpSystemSource</item>
+                    <item name="namespace" xsi:type="string">skipSystem</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

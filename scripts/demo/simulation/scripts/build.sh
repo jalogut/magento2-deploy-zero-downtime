@@ -22,13 +22,13 @@ printf "${CYAN}GENERATE FILES${COLOR_RESET}\n"
 echo "cd ${BUILD}/${MAGENTO_DIR}"
 echo "bin/magento setup:di:compile"
 printf "wait... ~2min \n"
-sleep 4
-echo "bin/magento setup:static-content:deploy -f en_US de_CH"
+sleep 2
+echo "bin/magento setup:static-content:deploy -f en_US de_CH --exclude-theme=Magento/blank"
 printf "wait... ~5min \n"
-sleep 6
-echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;\n"
-printf "wait... ~3min \n"
 sleep 4
+echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;"
+printf "wait... ~3min \n"
+sleep 3
 echo ""
 
 printf "${CYAN}CREATE ARTIFACT${COLOR_RESET}\n"

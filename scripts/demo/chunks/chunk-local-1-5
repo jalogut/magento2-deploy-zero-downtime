@@ -1,0 +1,21 @@
+  'system' => 
+  array (
+    'default' => 
+    array (
+      'dev' => 
+      array (
+        'js' => 
+        array (
+          'minify_files' => '1',
+        ),
+        'css' => 
+        array (
+          'minify_files' => '1',
+        ),
+        'static' => 
+        array (
+          'sign' => '1',
+        ),
+      ),
+    ),
+  )

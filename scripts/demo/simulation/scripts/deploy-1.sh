@@ -33,7 +33,7 @@ sleep 4
 echo "bin/magento setup:static-content:deploy en_US de_CH --exclude-theme=Magento/blank"
 printf "wait... ~5min \n"
 sleep 6
-echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;\n"
+echo "find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} \; && find var vendor pub/static pub/media app/etc -type d -exec chmod g+w {} \;"
 printf "wait... ~3min \n"
 sleep 4
 echo ""
@@ -49,9 +49,10 @@ echo ""
 printf "${CYAN}SWITCH LIVE${COLOR_RESET}\n"
 echo "cd ${WORKING_DIR}"
 printf "${GREEN}unlink ${LIVE_DIRECTORY_ROOT} && ln -sf ${TARGET} ${LIVE_DIRECTORY_ROOT}${COLOR_RESET}\n"
-printf "${LIVE}/${MAGENTO_DIR}/bin/magento cache:flush\n"
+printf "${LIVE_DIRECTORY_ROOT}/${MAGENTO_DIR}/bin/magento cache:flush\n"
 echo ""
 printf "${YELLOW}Release finish - Downtime: [~20sec]${COLOR_RESET}\n"
 
 mv ${WORKING_DIR}/../demo-backups/${TARGET} ${TARGET}
 unlink ${LIVE_DIRECTORY_ROOT} && ln -s ${TARGET} ${LIVE_DIRECTORY_ROOT}
+touch ${TARGET}/release-timestamp

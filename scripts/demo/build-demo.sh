@@ -38,7 +38,7 @@ sleep 1
 pe "vim artifact.excludes"
 
 VERSION="1.2"
-p "VERSION=${VERSION} ~/simulation/build.sh"
+p "VERSION=${VERSION} ./build.sh"
 VERSION=${VERSION} ${DIR}/simulation/scripts/build.sh
 
 unset TYPE_SPEED
