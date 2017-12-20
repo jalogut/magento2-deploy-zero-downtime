@@ -502,10 +502,10 @@ setup:static-content:deploy -f --exclude-theme=Magento/blank
 
 <br>
 
-- [magento2-builder-tool](https://github.com/staempfli/magento2-builder-tool)
-- [magento2-deployment-tool](https://github.com/staempfli/magento2-deployment-tool)
+- [staempfli/magento2-builder-tool](https://github.com/staempfli/magento2-builder-tool)
+- [staempfli/magento2-deployment-tool](https://github.com/staempfli/magento2-deployment-tool)
 
-Example: [magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-builder)
+Usage Example: [jalogut/magento-22-mg2-builder](https://github.com/jalogut/magento-22-mg2-builder)
 
 ---
 @title[Take aways]
